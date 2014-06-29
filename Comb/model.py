@@ -69,6 +69,8 @@ def rsg_resonances(hname):
 def external_to_internal(hname):
     print 'replacing ' + hname,
     m = {'RSGluon_':'rsg',
+         'RSgluon':'rsg',
+         'RSG':'rsg',
          'ZprimeNrw_1000':'zp1000w1p',
          'ZprimeNrw_1100':'zp1100w1p',
          'ZprimeNrw_1200':'zp1200w1p',
@@ -170,7 +172,7 @@ def build_dilep_model(files, filter, signal, mcstat):
 
 def build_boosted_allhadronic_CMSTT_model(files, filter, signal, mcstat):
     """ All hadronic high mass model """    
-    model = build_model_from_rootfile(files, filter, include_mc_uncertainties = mcstat)
+    model = build_model_from_rootfile(files, filter, root_hname_to_convention = external_to_internal, include_mc_uncertainties = mcstat)
     model.fill_histogram_zerobins()
     model.set_signal_processes(signal)
     for p in model.processes:
@@ -182,7 +184,7 @@ def build_boosted_allhadronic_CMSTT_model(files, filter, signal, mcstat):
     return model
 
 def build_boosted_allhadronic_HTT_model(files, filter, signal, mcstat):
-    model = build_model_from_rootfile(files, filter, signal, root_hname_to_convention = external_to_internal, include_mc_uncertainties=mcstat)
+    model = build_model_from_rootfile(files, filter, root_hname_to_convention = external_to_internal, include_mc_uncertainties=mcstat)
     model.fill_histogram_zerobins()
     model.set_signal_processes(signal)
     for p in model.processes:
@@ -217,29 +219,31 @@ def build_boosted_semileptonic_model(files, filter, signal, mcstat, eflag=False,
     model.add_lognormal_uncertainty('diboson_rate', math.log(1.5), 'diboson')
 
     if muflag:
-        for obs in ['mu_0btag_mttbar']:
-            for proc in ('wc', 'wb'):
-                model.add_asymmetric_lognormal_uncertainty('scale_vjets', -math.log(1.577), math.log(0.710), proc, obs)
-                model.add_asymmetric_lognormal_uncertainty('matching_vjets', -math.log(1.104), math.log(1.052), proc, obs)
-        for obs in ['mu_1btag_mttbar']:
+        for obs in ['mu_0top0btag_mttbar','mu_0top1btag_mttbar','mu_1top_mttbar']:
             for proc in ('wc', 'wb', 'wlight'):
                 model.add_asymmetric_lognormal_uncertainty('scale_vjets', -math.log(1.577), math.log(0.710), proc, obs)
                 model.add_asymmetric_lognormal_uncertainty('matching_vjets', -math.log(1.104), math.log(1.052), proc, obs)
 
     if eflag:
-        for obs in ['el_0btag_mttbar']:
-            for proc in ('wc', 'wb'):
-                model.add_asymmetric_lognormal_uncertainty('scale_vjets', -math.log(1.584), math.log(0.690), proc, obs)
-                model.add_asymmetric_lognormal_uncertainty('matching_vjets', -math.log(1.0447), math.log(1.0706), proc, obs)
-            for proc in model.processes:
-                model.add_lognormal_uncertainty('elid_rate', math.log(1.05), proc, obs)            
-        for obs in ['el_1btag_mttbar']:
-            for proc in ('wc', 'wb', 'wlight'):
-                model.add_asymmetric_lognormal_uncertainty('scale_vjets', -math.log(1.584), math.log(0.690), proc, obs)
-                model.add_asymmetric_lognormal_uncertainty('matching_vjets', -math.log(1.0447), math.log(1.0706), proc, obs)
-            for proc in model.processes:
-                model.add_lognormal_uncertainty('elid_rate', math.log(1.05), proc, obs)
-    
+        #For categories with low statistics, use flat uncertainties instead of shape
+        #  Template for the following lines:
+        #    model.add_lognormal_uncertainty(sys, math.log( _DIFF_ ), proc, obs)
+        #  Where _DIFF_ = 2.0 * proc_sys_plus.Integral() / (proc_sys_minus.Integral() + proc_sys_plus.Integral())
+        #    after the Chi2 selection
+        for obs in ['el_0top0btag_mttbar','el_0top1btag_mttbar','el_1top_mttbar']:
+            model.add_lognormal_uncertainty('scale_vjets', math.log(0.50611), 'wb', obs)
+            model.add_lognormal_uncertainty('matching_vjets', math.log(0.98630), 'wb', obs)
+
+            model.add_lognormal_uncertainty('scale_vjets', math.log(0.50099), 'wc', obs)
+            model.add_lognormal_uncertainty('matching_vjets', math.log(1.01989), 'wc', obs)
+
+        for obs in ['el_0top0btag_mttbar','el_0top1btag_mttbar','el_1top_mttbar']:
+            model.add_lognormal_uncertainty('scale_vjets', math.log(0.49152), 'wlight', obs)
+            model.add_lognormal_uncertainty('matching_vjets', math.log(1.02911), 'wlight', obs)
+
+        for p in model.processes:
+            model.add_lognormal_uncertainty('eltrig_rate', math.log(1.01), p)
+
     return model
 
 
@@ -338,16 +342,16 @@ def build_model(type, jet1 = None, mcstat = True):
             'rsg*',
             mcstat
             )
-        model4 = build_dilep_model(
-            ['dilep_GKK.root'],
-            rsg_resonances,
-            'rsg*',
-            mcstat
-            )
+        #model4 = build_dilep_model(
+        #    ['dilep_GKK.root'],
+        #    rsg_resonances,
+        #    'rsg*',
+        #    mcstat
+        #    )
         model = model1
         model.combine(model2,False)
         model.combine(model3,False)
-        model.combine(model4,False)
+        #model.combine(model4,False)
 
 
 
