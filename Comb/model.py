@@ -71,74 +71,83 @@ def external_to_internal(hname):
     m = {'RSGluon_':'rsg',
          'RSgluon':'rsg',
          'RSG':'rsg',
-         'ZprimeNrw_1000':'zp1000w1p',
-         'ZprimeNrw_1100':'zp1100w1p',
-         'ZprimeNrw_1200':'zp1200w1p',
-         'ZprimeNrw_1300':'zp1300w1p',
-         'ZprimeNrw_1400':'zp1400w1p',
-         'ZprimeNrw_1500':'zp1500w1p',
-         'ZprimeNrw_1600':'zp1600w1p',
-         'ZprimeNrw_1700':'zp1700w1p',
-         'ZprimeNrw_1800':'zp1800w1p',
-         'ZprimeNrw_1900':'zp1900w1p',
-         'ZprimeNrw_2000':'zp2000w1p',
-         'ZprimeNrw_2100':'zp2100w1p',
-         'ZprimeNrw_2200':'zp2200w1p',
-         'ZprimeNrw_2300':'zp2300w1p',
-         'ZprimeNrw_2400':'zp2400w1p',
-         'ZprimeNrw_2500':'zp2500w1p',
-         'ZprimeNrw_2600':'zp2600w1p',
-         'ZprimeNrw_2700':'zp2700w1p',
-         'ZprimeNrw_2800':'zp2800w1p',
-         'ZprimeNrw_2900':'zp2900w1p',
-         'ZprimeNrw_3000':'zp3000w1p',
-         'ZprimeNrw_3100':'zp3100w1p',
-         'ZprimeNrw_3200':'zp3200w1p',
-         'ZprimeNrw_3300':'zp3300w1p',
-         'ZprimeNrw_3400':'zp3400w1p',
-         'ZprimeNrw_3500':'zp3500w1p',
-         'ZprimeNrw_3600':'zp3600w1p',
-         'ZprimeNrw_3700':'zp3700w1p',
-         'ZprimeNrw_3800':'zp3800w1p',
-         'ZprimeNrw_3900':'zp3900w1p',
-         'ZprimeNrw_4000':'zp4000w1p',
-         'ZprimeWde_1000':'zp1000w10p',
-         'ZprimeWde_1100':'zp1100w10p',
-         'ZprimeWde_1200':'zp1200w10p',
-         'ZprimeWde_1300':'zp1300w10p',
-         'ZprimeWde_1400':'zp1400w10p',
-         'ZprimeWde_1500':'zp1500w10p',
-         'ZprimeWde_1600':'zp1600w10p',
-         'ZprimeWde_1700':'zp1700w10p',
-         'ZprimeWde_1800':'zp1800w10p',
-         'ZprimeWde_1900':'zp1900w10p',
-         'ZprimeWde_2000':'zp2000w10p',
-         'ZprimeWde_2100':'zp2100w10p',
-         'ZprimeWde_2200':'zp2200w10p',
-         'ZprimeWde_2300':'zp2300w10p',
-         'ZprimeWde_2400':'zp2400w10p',
-         'ZprimeWde_2500':'zp2500w10p',
-         'ZprimeWde_2600':'zp2600w10p',
-         'ZprimeWde_2700':'zp2700w10p',
-         'ZprimeWde_2800':'zp2800w10p',
-         'ZprimeWde_2900':'zp2900w10p',
-         'ZprimeWde_3000':'zp3000w10p',
-         'ZprimeWde_3100':'zp3100w10p',
-         'ZprimeWde_3200':'zp3200w10p',
-         'ZprimeWde_3300':'zp3300w10p',
-         'ZprimeWde_3400':'zp3400w10p',
-         'ZprimeWde_3500':'zp3500w10p',
-         'ZprimeWde_3600':'zp3600w10p',
-         'ZprimeWde_3700':'zp3700w10p',
-         'ZprimeWde_3800':'zp3800w10p',
-         'ZprimeWde_3900':'zp3900w10p',
-         'ZprimeWde_4000':'zp4000w10p',
+         'Zprime1000':'zp1000',
+         'Zprime1250':'zp1250',
+         'Zprime500':'zp500',
+         'Zprime750':'zp750',
+         'Zprime1100':'zp1100',
+         'Zprime1200':'zp1200',
+         'Zprime1300':'zp1300',
+         'Zprime1400':'zp1400',
+         'Zprime1500':'zp1500',
+         'Zprime1600':'zp1600',
+         'Zprime1700':'zp1700',
+         'Zprime1800':'zp1800',
+         'Zprime1900':'zp1900',
+         'Zprime2000':'zp2000',
+         'Zprime2100':'zp2100',
+         'Zprime2200':'zp2200',
+         'Zprime2300':'zp2300',
+         'Zprime2400':'zp2400',
+         'Zprime2500':'zp2500',
+         'Zprime2600':'zp2600',
+         'Zprime2700':'zp2700',
+         'Zprime2800':'zp2800',
+         'Zprime2900':'zp2900',
+         'Zprime3000':'zp3000',
+         'Zprime3100':'zp3100',
+         'Zprime3200':'zp3200',
+         'Zprime3300':'zp3300',
+         'Zprime3400':'zp3400',
+         'Zprime3500':'zp3500',
+         'Zprime3600':'zp3600',
+         'Zprime3700':'zp3700',
+         'Zprime3800':'zp3800',
+         'Zprime3900':'zp3900',
+         'Zprime4000':'zp4000',
+         'ZprimeWde1000':'zp1000w10p',
+         'ZprimeWde500':'zp500w10p',
+         'ZprimeWde750':'zp750w10p',
+         'ZprimeWde1250':'zp1250w10p',
+         'ZprimeWde1100':'zp1100w10p',
+         'ZprimeWde1200':'zp1200w10p',
+         'ZprimeWde1300':'zp1300w10p',
+         'ZprimeWde1400':'zp1400w10p',
+         'ZprimeWde1500':'zp1500w10p',
+         'ZprimeWde1600':'zp1600w10p',
+         'ZprimeWde1700':'zp1700w10p',
+         'ZprimeWde1800':'zp1800w10p',
+         'ZprimeWde1900':'zp1900w10p',
+         'ZprimeWde2000':'zp2000w10p',
+         'ZprimeWde2100':'zp2100w10p',
+         'ZprimeWde2200':'zp2200w10p',
+         'ZprimeWde2300':'zp2300w10p',
+         'ZprimeWde2400':'zp2400w10p',
+         'ZprimeWde2500':'zp2500w10p',
+         'ZprimeWde2600':'zp2600w10p',
+         'ZprimeWde2700':'zp2700w10p',
+         'ZprimeWde2800':'zp2800w10p',
+         'ZprimeWde2900':'zp2900w10p',
+         'ZprimeWde3000':'zp3000w10p',
+         'ZprimeWde3100':'zp3100w10p',
+         'ZprimeWde3200':'zp3200w10p',
+         'ZprimeWde3300':'zp3300w10p',
+         'ZprimeWde3400':'zp3400w10p',
+         'ZprimeWde3500':'zp3500w10p',
+         'ZprimeWde3600':'zp3600w10p',
+         'ZprimeWde3700':'zp3700w10p',
+         'ZprimeWde3800':'zp3800w10p',
+         'ZprimeWde3900':'zp3900w10p',
+         'ZprimeWde4000':'zp4000w10p',
          'ttjets':'ttbar'
          }
+    hname = hname.replace('w1p', '')
     for old_pname in m:
         if ('__' + old_pname) in hname: hname = hname.replace('__' + old_pname, '__' + m[old_pname])
     print ' changed to ' + hname
+   
     return hname
+
 
 
 def build_dilep_model(files, filter, signal, mcstat):
@@ -161,9 +170,9 @@ def build_dilep_model(files, filter, signal, mcstat):
     # will be 100% correlated.
 
     model.add_lognormal_uncertainty('ttbar_rate',     math.log(1.15), 'ttbar'    )
-    model.add_lognormal_uncertainty('zj_rate',        math.log(2.0),  'zlight'       )
+    model.add_lognormal_uncertainty('zj_rate',        math.log(2.0),  'DY'       )
     model.add_lognormal_uncertainty('st_rate',        math.log(1.50), 'singletop')
-    model.add_lognormal_uncertainty('diboson_rate',   math.log(1.5),  'diboson'       )
+    model.add_lognormal_uncertainty('diboson_rate',   math.log(1.5),  'VV'       )
 
     for p2 in model.processes:
         model.add_lognormal_uncertainty('lumi', math.log(1.026), p2)
@@ -202,7 +211,7 @@ def build_boosted_allhadronic_model(files, filter, signal, mcstat):
 
 def build_boosted_semileptonic_model(files, filter, signal, mcstat, eflag=False, muflag=False):
     """ Semileptonic high mass model"""
-    model = build_model_from_rootfile(files, filter, include_mc_uncertainties = mcstat)
+    model = build_model_from_rootfile(files, filter, root_hname_to_convention = external_to_internal, include_mc_uncertainties = mcstat)
     model.fill_histogram_zerobins()
     model.set_signal_processes(signal)
     for p in model.processes:
@@ -265,7 +274,7 @@ def build_model(type, jet1 = None, mcstat = True):
             muflag = True                
         )
         model2 = build_boosted_allhadronic_CMSTT_model(
-            ['ZpN_templates_May20.root'],
+            ['templates_ZpN.root'],
             narrow_resonances,
             'zp*',
             mcstat
@@ -298,7 +307,7 @@ def build_model(type, jet1 = None, mcstat = True):
             muflag = True                
         )
         model2 = build_boosted_allhadronic_CMSTT_model(
-            ['ZpW_templates_May20.root'],
+            ['templates_ZpW.root'],
             wide_resonances,
             'zp*',
             mcstat
@@ -331,7 +340,7 @@ def build_model(type, jet1 = None, mcstat = True):
             muflag = True
         )
         model2 = build_boosted_allhadronic_CMSTT_model(
-            ['RSG_templates_May20.root'],
+            ['templates_RSG.root'],
             rsg_resonances,
             'rsg*',
             mcstat
@@ -372,3 +381,8 @@ def build_model(type, jet1 = None, mcstat = True):
         #        model.distribution.set_distribution_parameters(p, range = [-0.0, 0.0])
 
     return model
+
+
+
+
+
