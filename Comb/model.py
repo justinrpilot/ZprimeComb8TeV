@@ -214,44 +214,41 @@ def build_boosted_semileptonic_model(files, filter, signal, mcstat, eflag=False,
     model = build_model_from_rootfile(files, filter, root_hname_to_convention = external_to_internal, include_mc_uncertainties = mcstat)
     model.fill_histogram_zerobins()
     model.set_signal_processes(signal)
+
     for p in model.processes:
         model.add_lognormal_uncertainty('lumi', math.log(1.026), p)
+        if eflag: model.add_lognormal_uncertainty('eltrig', math.log(1.01), p)
 
-    model.add_lognormal_uncertainty('zj_rate', math.log(2.0), 'zlight')
-    model.add_lognormal_uncertainty('wj_rate', math.log(1.5), 'wlight')
-    model.add_lognormal_uncertainty('wj_rate', math.log(1.5), 'wb')
-    model.add_lognormal_uncertainty('wj_rate', math.log(1.5), 'wc')
-    model.add_lognormal_uncertainty('wb_rate', math.log(1.87), 'wb')
-    model.add_lognormal_uncertainty('wc_rate', math.log(1.87), 'wc')
     model.add_lognormal_uncertainty('ttbar_rate', math.log(1.15), 'ttbar')
+    model.add_lognormal_uncertainty('wl_rate', math.log(1.5), 'wlight')
+    model.add_lognormal_uncertainty('wc_rate', math.log(2.0), 'wc')
+    model.add_lognormal_uncertainty('wb_rate', math.log(2.0), 'wb')
     model.add_lognormal_uncertainty('st_rate', math.log(1.5), 'singletop')
+    model.add_lognormal_uncertainty('zj_rate', math.log(2.0), 'zlight')
     model.add_lognormal_uncertainty('diboson_rate', math.log(1.5), 'diboson')
 
-    if muflag:
-        for obs in ['mu_0top0btag_mttbar','mu_0top1btag_mttbar','mu_1top_mttbar']:
-            for proc in ('wc', 'wb', 'wlight'):
-                model.add_asymmetric_lognormal_uncertainty('scale_vjets', -math.log(1.577), math.log(0.710), proc, obs)
-                model.add_asymmetric_lognormal_uncertainty('matching_vjets', -math.log(1.104), math.log(1.052), proc, obs)
-
-    if eflag:
-        #For categories with low statistics, use flat uncertainties instead of shape
-        #  Template for the following lines:
-        #    model.add_lognormal_uncertainty(sys, math.log( _DIFF_ ), proc, obs)
-        #  Where _DIFF_ = 2.0 * proc_sys_plus.Integral() / (proc_sys_minus.Integral() + proc_sys_plus.Integral())
-        #    after the Chi2 selection
-        for obs in ['el_0top0btag_mttbar','el_0top1btag_mttbar','el_1top_mttbar']:
-            model.add_lognormal_uncertainty('scale_vjets', math.log(0.50611), 'wb', obs)
-            model.add_lognormal_uncertainty('matching_vjets', math.log(0.98630), 'wb', obs)
-
-            model.add_lognormal_uncertainty('scale_vjets', math.log(0.50099), 'wc', obs)
-            model.add_lognormal_uncertainty('matching_vjets', math.log(1.01989), 'wc', obs)
-
-        for obs in ['el_0top0btag_mttbar','el_0top1btag_mttbar','el_1top_mttbar']:
-            model.add_lognormal_uncertainty('scale_vjets', math.log(0.49152), 'wlight', obs)
-            model.add_lognormal_uncertainty('matching_vjets', math.log(1.02911), 'wlight', obs)
-
-        for p in model.processes:
-            model.add_lognormal_uncertainty('eltrig_rate', math.log(1.01), p)
+#    if muflag:
+#        for obs in ['mu_0top0btag_mttbar','mu_0top1btag_mttbar','mu_1top_mttbar']:
+#            for proc in ('wc', 'wb', 'wlight'):
+#                model.add_asymmetric_lognormal_uncertainty('scale_vjets', -math.log(1.577), math.log(0.710), proc, obs)
+#                model.add_asymmetric_lognormal_uncertainty('matching_vjets', -math.log(1.104), math.log(1.052), proc, obs)
+#
+#    if eflag:
+#        #For categories with low statistics, use flat uncertainties instead of shape
+#        #  Template for the following lines:
+#        #    model.add_lognormal_uncertainty(sys, math.log( _DIFF_ ), proc, obs)
+#        #  Where _DIFF_ = 2.0 * proc_sys_plus.Integral() / (proc_sys_minus.Integral() + proc_sys_plus.Integral())
+#        #    after the Chi2 selection
+#        for obs in ['el_0top0btag_mttbar','el_0top1btag_mttbar','el_1top_mttbar']:
+#            model.add_lognormal_uncertainty('scale_vjets', math.log(0.50611), 'wb', obs)
+#            model.add_lognormal_uncertainty('matching_vjets', math.log(0.98630), 'wb', obs)
+#
+#            model.add_lognormal_uncertainty('scale_vjets', math.log(0.50099), 'wc', obs)
+#            model.add_lognormal_uncertainty('matching_vjets', math.log(1.01989), 'wc', obs)
+#
+#        for obs in ['el_0top0btag_mttbar','el_0top1btag_mttbar','el_1top_mttbar']:
+#            model.add_lognormal_uncertainty('scale_vjets', math.log(0.49152), 'wlight', obs)
+#            model.add_lognormal_uncertainty('matching_vjets', math.log(1.02911), 'wlight', obs)
 
     return model
 
