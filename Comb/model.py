@@ -2,6 +2,8 @@
 ### Filter definitions ###
 
 def narrow_resonances(hname):
+    if 'RSg' in hname:
+	return False
     # Accept anything that there is neither of the signals
     if 'rsg' not in hname and 'zp' not in hname :
         return True
@@ -21,6 +23,10 @@ def narrow_resonances(hname):
 
 def wide_resonances(hname):
     # Accept anything that there is neither of the signals
+    if 'RSg' in hname:
+	return False
+    if 'Zprime' in hname and 'Wide' not in hname and 'htt' not in hname:
+	return False
     if 'rsg' not in hname and 'zp' not in hname :
         return True
     # Reject RS gluons as signal
@@ -39,6 +45,8 @@ def wide_resonances(hname):
 
 def rsg_resonances(hname):
     # Accept anything that there is neither of the signals
+    if 'zp' in hname or 'Zprime' in hname:
+	return False
     if 'rsg' not in hname and 'zp' not in hname :
         return True
     # Reject zp as signal
@@ -71,6 +79,7 @@ def external_to_internal(hname):
     m = {'RSGluon_':'rsg',
          'RSgluon':'rsg',
          'RSG':'rsg',
+         'kkg':'rsg',
          'Zprime1000':'zp1000',
          'Zprime1250':'zp1250',
          'Zprime500':'zp500',
@@ -105,45 +114,52 @@ def external_to_internal(hname):
          'Zprime3800':'zp3800',
          'Zprime3900':'zp3900',
          'Zprime4000':'zp4000',
-         'ZprimeWde1000':'zp1000w10p',
-         'ZprimeWde500':'zp500w10p',
-         'ZprimeWde750':'zp750w10p',
-         'ZprimeWde1250':'zp1250w10p',
-         'ZprimeWde1100':'zp1100w10p',
-         'ZprimeWde1200':'zp1200w10p',
-         'ZprimeWde1300':'zp1300w10p',
-         'ZprimeWde1400':'zp1400w10p',
-         'ZprimeWde1500':'zp1500w10p',
-         'ZprimeWde1600':'zp1600w10p',
-         'ZprimeWde1700':'zp1700w10p',
-         'ZprimeWde1800':'zp1800w10p',
-         'ZprimeWde1900':'zp1900w10p',
-         'ZprimeWde2000':'zp2000w10p',
-         'ZprimeWde2100':'zp2100w10p',
-         'ZprimeWde2200':'zp2200w10p',
-         'ZprimeWde2300':'zp2300w10p',
-         'ZprimeWde2400':'zp2400w10p',
-         'ZprimeWde2500':'zp2500w10p',
-         'ZprimeWde2600':'zp2600w10p',
-         'ZprimeWde2700':'zp2700w10p',
-         'ZprimeWde2800':'zp2800w10p',
-         'ZprimeWde2900':'zp2900w10p',
-         'ZprimeWde3000':'zp3000w10p',
-         'ZprimeWde3100':'zp3100w10p',
-         'ZprimeWde3200':'zp3200w10p',
-         'ZprimeWde3300':'zp3300w10p',
-         'ZprimeWde3400':'zp3400w10p',
-         'ZprimeWde3500':'zp3500w10p',
-         'ZprimeWde3600':'zp3600w10p',
-         'ZprimeWde3700':'zp3700w10p',
-         'ZprimeWde3800':'zp3800w10p',
-         'ZprimeWde3900':'zp3900w10p',
-         'ZprimeWde4000':'zp4000w10p',
-         'ttjets':'ttbar'
+         'ZprimeWide1000':'zp1000',
+         'ZprimeWide500':'zp500',
+         'ZprimeWide750':'zp750',
+         'ZprimeWide1250':'zp1250',
+         'ZprimeWide1100':'zp1100',
+         'ZprimeWide1200':'zp1200',
+         'ZprimeWide1300':'zp1300',
+         'ZprimeWide1400':'zp1400',
+         'ZprimeWide1500':'zp1500',
+         'ZprimeWide1600':'zp1600',
+         'ZprimeWide1700':'zp1700',
+         'ZprimeWide1800':'zp1800',
+         'ZprimeWide1900':'zp1900',
+         'ZprimeWide2000':'zp2000',
+         'ZprimeWide2100':'zp2100',
+         'ZprimeWide2200':'zp2200',
+         'ZprimeWide2300':'zp2300',
+         'ZprimeWide2400':'zp2400',
+         'ZprimeWide2500':'zp2500',
+         'ZprimeWide2600':'zp2600',
+         'ZprimeWide2700':'zp2700',
+         'ZprimeWide2800':'zp2800',
+         'ZprimeWide2900':'zp2900',
+         'ZprimeWide3000':'zp3000',
+         'ZprimeWide3100':'zp3100',
+         'ZprimeWide3200':'zp3200',
+         'ZprimeWide3300':'zp3300',
+         'ZprimeWide3400':'zp3400',
+         'ZprimeWide3500':'zp3500',
+         'ZprimeWide3600':'zp3600',
+         'ZprimeWide3700':'zp3700',
+         'ZprimeWide3800':'zp3800',
+         'ZprimeWide3900':'zp3900',
+         'ZprimeWide4000':'zp4000',
+         'ttjets':'ttbar',
+	 'electronid':'eleid',
+	 'electrontrig':'eletrig_rate',
+	 'muonid':'muoid',
+	 'btagbc':'btag',
+	 'btaglight':'bmistag',
+	 'Q2scale':'q2'
          }
-    hname = hname.replace('w1p', '')
     for old_pname in m:
         if ('__' + old_pname) in hname: hname = hname.replace('__' + old_pname, '__' + m[old_pname])
+    hname = hname.replace('w10p', 'w')
+    hname = hname.replace('0w', '0')
     print ' changed to ' + hname
    
     return hname
@@ -156,7 +172,7 @@ def build_dilep_model(files, filter, signal, mcstat):
     # which also includes rate changes according to the alternate shapes.
     # For more info about this model and naming conventuion, see documentation
     # of build_model_from_rootfile.
-    model = build_model_from_rootfile(files, filter, include_mc_uncertainties = mcstat)
+    model = build_model_from_rootfile(files, filter, root_hname_to_convention = external_to_internal, include_mc_uncertainties = mcstat)
     model.fill_histogram_zerobins()
     model.set_signal_processes(signal)
 
@@ -187,7 +203,7 @@ def build_boosted_allhadronic_CMSTT_model(files, filter, signal, mcstat):
     for p in model.processes:
         if p=='qcd': continue
         model.add_lognormal_uncertainty('lumi', math.log(1.026), p)
-        model.add_lognormal_uncertainty('subjet_scalefactor', math.log(1.084), p)
+        model.add_lognormal_uncertainty('toptag', math.log(1.200), p)
         model.add_lognormal_uncertainty('trigger', math.log(1.02), p)
     model.add_lognormal_uncertainty('ttbar_rate', math.log(1.15), 'ttbar')
     return model
@@ -348,16 +364,16 @@ def build_model(type, jet1 = None, mcstat = True):
             'rsg*',
             mcstat
             )
-        #model4 = build_dilep_model(
-        #    ['dilep_GKK.root'],
-        #    rsg_resonances,
-        #    'rsg*',
-        #    mcstat
-        #    )
+        model4 = build_dilep_model(
+            ['dilep_GKK.root'],
+            rsg_resonances,
+            'rsg*',
+            mcstat
+            )
         model = model1
         model.combine(model2,False)
         model.combine(model3,False)
-        #model.combine(model4,False)
+        model.combine(model4,False)
 
 
 
@@ -376,10 +392,13 @@ def build_model(type, jet1 = None, mcstat = True):
         #else:
         #    if d['typ'] == 'gauss' and d['mean'] == 0.0 and d['width'] == 1.0:
         #        model.distribution.set_distribution_parameters(p, range = [-0.0, 0.0])
+	if p == 'toptag' or p == 'btag' or p == 'subjbtag':
+	     model.distribution.set_distribution_parameters(p, range = [-inf, inf])
 
     return model
 
 
-
+model = build_model('narrow_resonances')
+model_summary(model)
 
 
