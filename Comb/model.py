@@ -203,7 +203,7 @@ def build_boosted_allhadronic_CMSTT_model(files, filter, signal, mcstat):
     for p in model.processes:
         if p=='qcd': continue
         model.add_lognormal_uncertainty('lumi', math.log(1.026), p)
-        model.add_lognormal_uncertainty('toptag', math.log(1.200), p)
+        model.add_lognormal_uncertainty('toptag', math.log(1.400), p)
         model.add_lognormal_uncertainty('trigger', math.log(1.02), p)
     model.add_lognormal_uncertainty('ttbar_rate', math.log(1.15), 'ttbar')
     return model
