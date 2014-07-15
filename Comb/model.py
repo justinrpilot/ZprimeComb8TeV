@@ -393,7 +393,7 @@ def build_model(type, jet1 = None, mcstat = True):
         #    if d['typ'] == 'gauss' and d['mean'] == 0.0 and d['width'] == 1.0:
         #        model.distribution.set_distribution_parameters(p, range = [-0.0, 0.0])
 	if p == 'toptag' or p == 'btag' or p == 'subjbtag':
-	     model.distribution.set_distribution_parameters(p, range = [-inf, inf])
+	     model.distribution.set_distribution_parameters(p, width = inf)
 
     return model
 
