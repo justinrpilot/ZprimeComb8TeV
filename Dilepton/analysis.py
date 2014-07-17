@@ -14,7 +14,8 @@ def get_model():
 
     # define what the signal processes are. All other processes are assumed to make up the 
     # 'background-only' model.
-    model.set_signal_processes('kkg*')
+    # model.set_signal_processes('Zprime*')
+    model.set_signal_processes('RSgluon*')
 
     # Add some lognormal rate uncertainties. The first parameter is the name of the
     # uncertainty (which will also be the name of the nuisance parameter), the second
