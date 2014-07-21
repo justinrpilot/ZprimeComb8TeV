@@ -35,9 +35,9 @@ def build_dilep_model(files, filter, signal, mcstat):
     model.set_signal_processes(signal)
 
     model.add_lognormal_uncertainty('ttbar_rate',   math.log(1.15), 'ttbar')
-    model.add_lognormal_uncertainty('zj_rate',      math.log(2.00), 'zlight')
-    model.add_lognormal_uncertainty('st_rate',      math.log(1.50), 'singletop')
-    model.add_lognormal_uncertainty('diboson_rate', math.log(1.50), 'diboson')
+    model.add_lognormal_uncertainty('zj_rate',      math.log(1.50), 'zlight')
+    model.add_lognormal_uncertainty('st_rate',      math.log(1.23), 'singletop')
+    model.add_lognormal_uncertainty('diboson_rate', math.log(1.20), 'diboson')
 
     for p in model.processes:
         model.add_lognormal_uncertainty('lumi', math.log(1.026), p)
@@ -84,12 +84,12 @@ def build_boosted_semileptonic_model(files, filter, signal, mcstat):
             model.add_lognormal_uncertainty('eleORjet_trig', math.log(1.01), p, obs)
 
     model.add_lognormal_uncertainty('ttbar_rate',   math.log(1.15), 'ttbar')
-    model.add_lognormal_uncertainty('wl_rate',      math.log(1.50), 'wlight')
-    model.add_lognormal_uncertainty('wc_rate',      math.log(2.00), 'wc')
-    model.add_lognormal_uncertainty('wb_rate',      math.log(2.00), 'wb')
-    model.add_lognormal_uncertainty('st_rate',      math.log(1.50), 'singletop')
-    model.add_lognormal_uncertainty('zj_rate',      math.log(2.00), 'zlight')
-    model.add_lognormal_uncertainty('diboson_rate', math.log(1.50), 'diboson')
+    model.add_lognormal_uncertainty('wl_rate',      math.log(1.09), 'wlight')
+    model.add_lognormal_uncertainty('wc_rate',      math.log(1.23), 'wc')
+    model.add_lognormal_uncertainty('wb_rate',      math.log(1.23), 'wb')
+    model.add_lognormal_uncertainty('st_rate',      math.log(1.23), 'singletop')
+    model.add_lognormal_uncertainty('zj_rate',      math.log(1.50), 'zlight')
+    model.add_lognormal_uncertainty('diboson_rate', math.log(1.20), 'diboson')
 
     return model
 
@@ -201,12 +201,9 @@ def build_model(type, mcstat = True):
         d = model.distribution.get_distribution(p)
         if d['typ'] == 'gauss' and d['mean'] == 0.0 and d['width'] == 1.0:
             model.distribution.set_distribution_parameters(p, range = [-5.0, 5.0])
-        if p == 'toptag' or p == 'btag' or p == 'subjbtag':
+        if p == 'toptag' or p == 'subjbtag':
             model.distribution.set_distribution_parameters(p, width = float("inf"))
-#        if (p == 'q2'): model.distribution.set_distribution_parameters(p, width = float(0.0001))
-#        if (p == 'q2_wjets'): model.distribution.set_distribution_parameters(p, width = float(0.0001))
-#        if (p == 'matching_wjets'): model.distribution.set_distribution_parameters(p, width = float(0.0001))
-#        if (p == 'pdf'): model.distribution.set_distribution_parameters(p, width = float(0.0001))
+        if (p == 'misErr'): model.distribution.set_distribution_parameters(p, width = float(0.0001))
 
     return model
 
