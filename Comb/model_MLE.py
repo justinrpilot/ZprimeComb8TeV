@@ -191,12 +191,6 @@ def build_model(type, mcstat = True):
     model.combine(model_heptt,False)
     model.combine(model_dilep,False)
 
-    for p in model.signal_processes:
-        model.scale_predictions(0.1,p)
-        if (p == 'Zprime1250') or (p == 'Zprime1500') or (p == 'Zprime2000') or (p == 'Zprime3000'): model.scale_predictions(0.01,p)
-        if (p == 'ZprimeWide1250') or (p == 'ZprimeWide1500') or (p == 'ZprimeWide2000') or (p == 'ZprimeWide3000'): model.scale_predictions(0.01,p)
-        if ('RSgluon' in p) and (float(p.strip('RSgluon')) >= 1200): model.scale_predictions(0.01,p)
-
     for p in model.distribution.get_parameters():
         d = model.distribution.get_distribution(p)
         if d['typ'] == 'gauss' and d['mean'] == 0.0 and d['width'] == 1.0:
