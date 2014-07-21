@@ -5,7 +5,8 @@ def narrow_resonances(hname):
     if ('Wide' in pname) or ('RSgluon' in pname): return False
     elif ('Zprime' in pname):
         mass = pname.strip('Zprime')
-        return float(mass) <= 4000
+        mass_list = [750, 1000, 1250, 1500, 2000, 3000] 
+        return float(mass) in mass_list
     else: return True
 
 def wide_resonances(hname):
@@ -14,7 +15,8 @@ def wide_resonances(hname):
     elif ('Zprime' in pname) and ('Wide' not in pname): return False
     elif ('ZprimeWide' in pname):
         mass = pname.strip('ZprimeWide')
-        return float(mass) <= 4000
+        mass_list = [750, 1000, 1250, 1500, 2000, 3000] 
+        return float(mass) in mass_list
     else: return True
 
 def rsg_resonances(hname):
@@ -22,7 +24,8 @@ def rsg_resonances(hname):
     if ('Zprime' in pname): return False
     elif ('RSgluon' in pname):
         mass = pname.strip('RSgluon')
-        return float(mass) <= 4000
+        mass_list = [700, 1000, 1400, 1500, 1800, 2000, 2500, 3000] 
+        return float(mass) in mass_list
     else: return True
 
 
@@ -188,15 +191,25 @@ def build_model(type, mcstat = True):
     model.combine(model_heptt,False)
     model.combine(model_dilep,False)
 
+    for p in model.signal_processes:
+        model.scale_predictions(0.1,p)
+        if (p == 'Zprime1250') or (p == 'Zprime1500') or (p == 'Zprime2000') or (p == 'Zprime3000'): model.scale_predictions(0.01,p)
+        if (p == 'ZprimeWide1250') or (p == 'ZprimeWide1500') or (p == 'ZprimeWide2000') or (p == 'ZprimeWide3000'): model.scale_predictions(0.01,p)
+        if ('RSgluon' in p) and (float(p.strip('RSgluon')) >= 1200): model.scale_predictions(0.01,p)
+
     for p in model.distribution.get_parameters():
         d = model.distribution.get_distribution(p)
         if d['typ'] == 'gauss' and d['mean'] == 0.0 and d['width'] == 1.0:
             model.distribution.set_distribution_parameters(p, range = [-5.0, 5.0])
         if p == 'toptag' or p == 'btag' or p == 'subjbtag':
             model.distribution.set_distribution_parameters(p, width = float("inf"))
+#        if (p == 'q2'): model.distribution.set_distribution_parameters(p, width = float(0.0001))
+#        if (p == 'q2_wjets'): model.distribution.set_distribution_parameters(p, width = float(0.0001))
+#        if (p == 'matching_wjets'): model.distribution.set_distribution_parameters(p, width = float(0.0001))
+#        if (p == 'pdf'): model.distribution.set_distribution_parameters(p, width = float(0.0001))
 
     return model
 
 
-model = build_model('narrow_resonances')
-model_summary(model)
+#model = build_model('narrow_resonances')
+#model_summary(model)
