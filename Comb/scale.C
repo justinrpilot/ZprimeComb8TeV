@@ -17,10 +17,10 @@ void scale(TString inname = "CMSTT_zpn.root")
 
   const Int_t Np = 7;
   TString pname[Np]   = { "ttbar",   "wlight",   "wc",   "st",   "wb", "diboson", "zlight"};
-  Double_t pscale[Np] = {   0.986,      0.975,  1.022,  0.841,  0.954,     1.014,   1.914 };
+  Double_t pscale[Np] = {   0.987,      0.990,  1.052,  0.834,  0.953,     1.015,   1.750 };
 
   // nuisance parameter for top-tagging
-  Double_t nutoptag = -0.465;
+  Double_t nutoptag = -0.436;
 
   // scale factor for toptagging
   //SF=exp(N*P)" where N is the nuisance parameter and P is the corresponding prior [example for 'toptag' N=-0.465 and P=ln(1.20) --> SF=0.919]

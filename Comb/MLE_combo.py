@@ -78,7 +78,17 @@ for obs in model.get_observables():
         mle_coeff[obs][p] = coeff
 
 # add stuff.. eg make histograms at the ML point
-
+print '\\n'
+for p in par_values:
+    if p == 'ttbar_rate':     print '%.3f' % 1.15**par_values[p] + ' ' + p
+    elif p == 'wl_rate':      print '%.3f' % 1.09**par_values[p] + ' ' + p
+    elif p == 'wc_rate':      print '%.3f' % 1.23**par_values[p] + ' ' + p
+    elif p == 'wb_rate':      print '%.3f' % 1.23**par_values[p] + ' ' + p
+    elif p == 'st_rate':      print '%.3f' % 1.23**par_values[p] + ' ' + p
+    elif p == 'zj_rate':      print '%.3f' % 1.50**par_values[p] + ' ' + p
+    elif p == 'diboson_rate': print '%.3f' % 1.20**par_values[p] + ' ' + p
+    elif p == 'toptag':       print '%.3f' % 1.20**par_values[p] + ' ' + p
+    elif p == 'subjbtag':     print '%.3f' % 1.20**par_values[p] + ' ' + p
 """
     file.write(addon)
     file.write('\n')

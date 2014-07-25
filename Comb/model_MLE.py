@@ -201,6 +201,7 @@ def build_model(type, mcstat = True):
         if (p == 'q2_wjets'): model.distribution.set_distribution_parameters(p, width = float(0.0001))
         if (p == 'matching_wjets'): model.distribution.set_distribution_parameters(p, width = float(0.0001))
         if (p == 'pdf'): model.distribution.set_distribution_parameters(p, width = float(0.0001))
+        if (p == 'misErr'): model.distribution.set_distribution_parameters(p, width = float(0.0001))
 
     return model
 

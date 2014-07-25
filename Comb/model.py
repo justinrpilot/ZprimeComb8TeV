@@ -112,13 +112,13 @@ def build_model(type, mcstat = True):
             mcstat
         )
         model_cmstt = build_boosted_allhadronic_CMSTT_model(
-            ['CMSTT_zpn_subjb_scaled.root'],
+            ['CMSTT_zpn_scaled.root'],
             narrow_resonances,
             'Zprime*',
             mcstat
         )
         model_heptt = build_boosted_allhadronic_HTT_model(
-            ['HEPTT_zpn_scaled_NN.root'],
+            ['HEPTT_zpn_scaled.root'],
             narrow_resonances,
             'Zprime*',
             mcstat
@@ -139,13 +139,13 @@ def build_model(type, mcstat = True):
             mcstat
         )
         model_cmstt = build_boosted_allhadronic_CMSTT_model(
-            ['CMSTT_zpw_subjb_scaled.root'],
+            ['CMSTT_zpw_scaled.root'],
             wide_resonances,
             'ZprimeWide*',
             mcstat
         )
         model_heptt = build_boosted_allhadronic_HTT_model(
-            ['HEPTT_zpw_scaled_NN.root'],
+            ['HEPTT_zpw_scaled.root'],
             wide_resonances,
             'ZprimeWide*',
             mcstat
@@ -166,13 +166,13 @@ def build_model(type, mcstat = True):
             mcstat
         )
         model_cmstt = build_boosted_allhadronic_CMSTT_model(
-            ['CMSTT_rsg_subjb_scaled.root'],
+            ['CMSTT_rsg_scaled.root'],
             rsg_resonances,
             'RSgluon*',
             mcstat
         )
         model_heptt = build_boosted_allhadronic_HTT_model(
-            ['HEPTT_rsg_scaled_NN.root'],
+            ['HEPTT_rsg_scaled.root'],
             rsg_resonances,
             'RSgluon*',
             mcstat
@@ -187,16 +187,16 @@ def build_model(type, mcstat = True):
     else: raise exceptions.ValueError('Type %s is undefined' % type)
 
 #    model = model_ljets
-    model = model_cmstt
+#    model = model_cmstt
 #    model = model_heptt
 #    model = model_dilep
 #    model = model_cmstt
 #    model.combine(model_heptt,False)
 
-#    model = model_ljets
-#    model.combine(model_cmstt,False)
-#    model.combine(model_heptt,False)
-#    model.combine(model_dilep,False)
+    model = model_ljets
+    model.combine(model_cmstt,False)
+    model.combine(model_heptt,False)
+    model.combine(model_dilep,False)
 
     scale1 = 0.1
     scale2 = 0.01
