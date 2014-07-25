@@ -106,25 +106,25 @@ def build_model(type, mcstat = True):
     if type == 'narrow_resonances':
 
         model_ljets = build_boosted_semileptonic_model(
-            ['ljets_all.root'],
+            ['ljets_all_scaled.root'],
             narrow_resonances,
             'Zprime*',
             mcstat
         )
         model_cmstt = build_boosted_allhadronic_CMSTT_model(
-            ['CMSTT_zpn.root'],
+            ['CMSTT_zpn_subjb_scaled.root'],
             narrow_resonances,
             'Zprime*',
             mcstat
         )
         model_heptt = build_boosted_allhadronic_HTT_model(
-            ['HEPTT_zpn.root'],
+            ['HEPTT_zpn_scaled_NN.root'],
             narrow_resonances,
             'Zprime*',
             mcstat
         )
         model_dilep = build_dilep_model(
-            ['dilep_zpn.root'],
+            ['dilep_zpn_scaled.root'],
             narrow_resonances,
             'Zprime*',
             mcstat
@@ -133,25 +133,25 @@ def build_model(type, mcstat = True):
     elif type == 'wide_resonances':
 
         model_ljets = build_boosted_semileptonic_model(
-            ['ljets_all.root'],
+            ['ljets_all_scaled.root'],
             wide_resonances,
             'ZprimeWide*',
             mcstat
         )
         model_cmstt = build_boosted_allhadronic_CMSTT_model(
-            ['CMSTT_zpw.root'],
+            ['CMSTT_zpw_subjb_scaled.root'],
             wide_resonances,
             'ZprimeWide*',
             mcstat
         )
         model_heptt = build_boosted_allhadronic_HTT_model(
-            ['HEPTT_zpw.root'],
+            ['HEPTT_zpw_scaled_NN.root'],
             wide_resonances,
             'ZprimeWide*',
             mcstat
         )
         model_dilep = build_dilep_model(
-            ['dilep_zpw.root'],
+            ['dilep_zpw_scaled.root'],
             wide_resonances,
             'ZprimeWide*',
             mcstat
@@ -160,25 +160,25 @@ def build_model(type, mcstat = True):
     elif type == 'rsg_resonances':
 
         model_ljets = build_boosted_semileptonic_model(
-            ['ljets_all.root'],
+            ['ljets_all_scaled.root'],
             rsg_resonances,
             'RSgluon*',
             mcstat
         )
         model_cmstt = build_boosted_allhadronic_CMSTT_model(
-            ['CMSTT_rsg.root'],
+            ['CMSTT_rsg_subjb_scaled.root'],
             rsg_resonances,
             'RSgluon*',
             mcstat
         )
         model_heptt = build_boosted_allhadronic_HTT_model(
-            ['HEPTT_rsg.root'],
+            ['HEPTT_rsg_scaled_NN.root'],
             rsg_resonances,
             'RSgluon*',
             mcstat
         )
         model_dilep = build_dilep_model(
-            ['dilep_rsg.root'],
+            ['dilep_rsg_scaled.root'],
             rsg_resonances,
             'RSgluon*',
             mcstat
@@ -186,16 +186,25 @@ def build_model(type, mcstat = True):
 
     else: raise exceptions.ValueError('Type %s is undefined' % type)
 
-    model = model_ljets
-    model.combine(model_cmstt,False)
-    model.combine(model_heptt,False)
-    model.combine(model_dilep,False)
+#    model = model_ljets
+    model = model_cmstt
+#    model = model_heptt
+#    model = model_dilep
+#    model = model_cmstt
+#    model.combine(model_heptt,False)
 
+#    model = model_ljets
+#    model.combine(model_cmstt,False)
+#    model.combine(model_heptt,False)
+#    model.combine(model_dilep,False)
+
+    scale1 = 0.1
+    scale2 = 0.01
     for p in model.signal_processes:
-        model.scale_predictions(0.1,p)
-        if (p == 'Zprime1250') or (p == 'Zprime1500') or (p == 'Zprime2000') or (p == 'Zprime3000'): model.scale_predictions(0.01,p)
-        if (p == 'ZprimeWide1250') or (p == 'ZprimeWide1500') or (p == 'ZprimeWide2000') or (p == 'ZprimeWide3000'): model.scale_predictions(0.01,p)
-        if ('RSgluon' in p) and (float(p.strip('RSgluon')) >= 1200): model.scale_predictions(0.01,p)
+        model.scale_predictions(scale1,p)
+        if (p == 'Zprime1250') or (p == 'Zprime1500') or (p == 'Zprime2000') or (p == 'Zprime3000'): model.scale_predictions(scale2,p)
+        if (p == 'ZprimeWide1250') or (p == 'ZprimeWide1500') or (p == 'ZprimeWide2000') or (p == 'ZprimeWide3000'): model.scale_predictions(scale2,p)
+        if ('RSgluon' in p) and (float(p.strip('RSgluon')) >= 1200): model.scale_predictions(scale2,p)
 
     for p in model.distribution.get_parameters():
         d = model.distribution.get_distribution(p)
@@ -203,7 +212,6 @@ def build_model(type, mcstat = True):
             model.distribution.set_distribution_parameters(p, range = [-5.0, 5.0])
         if p == 'toptag' or p == 'subjbtag':
             model.distribution.set_distribution_parameters(p, width = float("inf"))
-        if (p == 'misErr'): model.distribution.set_distribution_parameters(p, width = float(0.0001))
 
     return model
 

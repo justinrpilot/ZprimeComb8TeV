@@ -197,7 +197,6 @@ def build_model(type, mcstat = True):
             model.distribution.set_distribution_parameters(p, range = [-5.0, 5.0])
         if p == 'toptag' or p == 'subjbtag':
             model.distribution.set_distribution_parameters(p, width = float("inf"))
-        if (p == 'misErr'): model.distribution.set_distribution_parameters(p, width = float(0.0001))
         if (p == 'q2'): model.distribution.set_distribution_parameters(p, width = float(0.0001))
         if (p == 'q2_wjets'): model.distribution.set_distribution_parameters(p, width = float(0.0001))
         if (p == 'matching_wjets'): model.distribution.set_distribution_parameters(p, width = float(0.0001))
