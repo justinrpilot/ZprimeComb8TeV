@@ -12,7 +12,7 @@ void scale(TString inname = "CMSTT_zpn.root")
 
   // create a new file
   TString outname = inname;
-  outname.ReplaceAll(".root", "_scaled.root");
+  outname.ReplaceAll(".root", "_scaled2.root");
   TFile* outfile = new TFile(outname, "RECREATE");
 
   const Int_t Np = 7;
@@ -102,8 +102,8 @@ void scale(TString inname = "CMSTT_zpn.root")
 	TString sys = ((TObjString*) tokname->At(2))->GetString();
 	TString var = ((TObjString*) tokname->At(3))->GetString();      
 	if (sys == "jec"){
-	  cout << "\ngot jec for process " << process << " and category " << cat << endl;
-	  CombineJECs(hist, cat, process, sys, var, file);	
+//	  cout << "\ngot jec for process " << process << " and category " << cat << endl;
+//	  CombineJECs(hist, cat, process, sys, var, file);	
 	}
       }
 

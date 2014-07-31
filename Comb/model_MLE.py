@@ -106,13 +106,13 @@ def build_model(type, mcstat = True):
     if type == 'narrow_resonances':
 
         model_ljets = build_boosted_semileptonic_model(
-            ['ljets_all.root'],
+            ['ljets_all_topmistag_0.87.root'],
             narrow_resonances,
             'Zprime*',
             mcstat
         )
         model_cmstt = build_boosted_allhadronic_CMSTT_model(
-            ['CMSTT_zpn.root'],
+            ['CMSTT_zpn_rebinned.root'],
             narrow_resonances,
             'Zprime*',
             mcstat
@@ -197,6 +197,8 @@ def build_model(type, mcstat = True):
             model.distribution.set_distribution_parameters(p, range = [-5.0, 5.0])
         if p == 'toptag' or p == 'subjbtag':
             model.distribution.set_distribution_parameters(p, width = float("inf"))
+        if (p == 'topmistag'): model.distribution.set_distribution_parameters(p, width = float(1.25))
+#        if (p == 'subjbtag'): model.distribution.set_distribution_parameters(p, width = float(0.00001))
         if (p == 'q2'): model.distribution.set_distribution_parameters(p, width = float(0.0001))
         if (p == 'q2_wjets'): model.distribution.set_distribution_parameters(p, width = float(0.0001))
         if (p == 'matching_wjets'): model.distribution.set_distribution_parameters(p, width = float(0.0001))

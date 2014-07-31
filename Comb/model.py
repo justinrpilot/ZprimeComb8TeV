@@ -188,10 +188,9 @@ def build_model(type, mcstat = True):
 
 #    model = model_ljets
 #    model = model_cmstt
+#    model.combine(model_heptt,False)
 #    model = model_heptt
 #    model = model_dilep
-#    model = model_cmstt
-#    model.combine(model_heptt,False)
 
     model = model_ljets
     model.combine(model_cmstt,False)
@@ -212,6 +211,7 @@ def build_model(type, mcstat = True):
             model.distribution.set_distribution_parameters(p, range = [-5.0, 5.0])
         if p == 'toptag' or p == 'subjbtag':
             model.distribution.set_distribution_parameters(p, width = float("inf"))
+        if p == 'topmistag': model.distribution.set_distribution_parameters(p, width = float(1.25))
 
     return model
 
