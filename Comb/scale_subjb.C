@@ -12,7 +12,7 @@ void scale_subjb(TString inname = "CMSTT_zpn.root")
   TFile* outfile = new TFile(outname, "RECREATE");
 
   // nuisance parameter for subjet b-tagging
-  Double_t nusubjbtag = 1.609;
+  Double_t nusubjbtag = 1.339;
 
   // loop over all entries in the file
   TKey *key;
