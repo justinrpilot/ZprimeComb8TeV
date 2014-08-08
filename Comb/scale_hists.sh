@@ -16,8 +16,11 @@ mv CMSTT_rsg_subjb_scaled.root CMSTT_rsg_scaled.root
 
 rm CMSTT_zpn_subjb.root CMSTT_zpw_subjb.root CMSTT_rsg_subjb.root
 
-# l+jets rates and top-tagging
-root -l -b -q 'scale.C("ljets_all_topmistag_0.87.root")'
+# l+jets rates and top-tagging, also topmistag
+root -l -b -q 'scale_topmistag.C("ljets_all.root")'
+root -l -b -q 'scale.C("ljets_all_topmistag_0.83.root")'
+mv ljets_all_topmistag_0.83_scaled.root ljets_all_scaled.root
+
 
 # dilepton rates
 root -l -b -q 'scale.C("dilep_zpn.root")'

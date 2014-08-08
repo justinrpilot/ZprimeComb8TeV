@@ -12,15 +12,15 @@ void scale(TString inname = "CMSTT_zpn.root")
 
   // create a new file
   TString outname = inname;
-  outname.ReplaceAll(".root", "_scaled2.root");
+  outname.ReplaceAll(".root", "_scaled.root");
   TFile* outfile = new TFile(outname, "RECREATE");
 
   const Int_t Np = 7;
   TString pname[Np]   = { "ttbar",   "wlight",   "wc",   "st",   "wb", "diboson", "zlight"};
-  Double_t pscale[Np] = {   0.987,      0.990,  1.052,  0.834,  0.953,     1.015,   1.750 };
+  Double_t pscale[Np] = {   0.987,      0.990,  1.060,  0.834,  0.953,     1.015,   1.723 };
 
   // nuisance parameter for top-tagging
-  Double_t nutoptag = -0.436;
+  Double_t nutoptag = -0.354;
 
   // scale factor for toptagging
   //SF=exp(N*P)" where N is the nuisance parameter and P is the corresponding prior [example for 'toptag' N=-0.465 and P=ln(1.20) --> SF=0.919]
