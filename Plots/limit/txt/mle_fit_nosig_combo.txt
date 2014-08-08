@@ -1,0 +1,23 @@
+  0.701  0.483  HEP toptagging
+ -1.821  0.840  CMS toptagging mistag
+ -0.354  0.133  CMS toptagging
+  1.339  1.456  CA8 subjet btagging
+  0.514  0.806  b-tagging mistag rate
+  0.176  0.314  b-tagging
+  0.487  0.593  pileup
+ -0.363  0.179  jet energy resolution
+ -0.613  0.086  jet energy scale
+ -0.100  0.953  electron ID
+ -1.745  0.554  muon trigger and ID
+ -0.845  0.683  single electron trigger
+ -0.037  0.433  QuadJet trigger
+  1.024  1.213  H_{T} trigger
+ -0.583  0.746  electron + jet trigger
+ -0.231  0.778  W+b cross section
+  0.279  0.914  W+c cross section
+ -0.115  0.555  W+light cross section
+  1.341  0.728  Z+jets cross section
+  0.084  0.955  diboson cross section
+ -0.875  0.939  single-top cross section
+ -0.090  0.140  t#bar{t} cross section
+ -0.057  0.766  luminosity
