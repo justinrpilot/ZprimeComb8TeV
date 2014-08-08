@@ -106,7 +106,7 @@ def build_model(type, mcstat = True):
     if type == 'narrow_resonances':
 
         model_ljets = build_boosted_semileptonic_model(
-            ['ljets_all_scaled.root'],
+            ['ljets_all_topmistag_0.87_scaled.root'],
             narrow_resonances,
             'Zprime*',
             mcstat
@@ -133,7 +133,7 @@ def build_model(type, mcstat = True):
     elif type == 'wide_resonances':
 
         model_ljets = build_boosted_semileptonic_model(
-            ['ljets_all_scaled.root'],
+            ['ljets_all_topmistag_0.87_scaled.root'],
             wide_resonances,
             'ZprimeWide*',
             mcstat
@@ -160,7 +160,7 @@ def build_model(type, mcstat = True):
     elif type == 'rsg_resonances':
 
         model_ljets = build_boosted_semileptonic_model(
-            ['ljets_all_scaled.root'],
+            ['ljets_all_topmistag_0.87_scaled.root'],
             rsg_resonances,
             'RSgluon*',
             mcstat
