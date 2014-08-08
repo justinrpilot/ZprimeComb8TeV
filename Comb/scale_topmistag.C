@@ -8,7 +8,7 @@ void scale_topmistag(TString inname = "ljets_all.root")
 
   // create a new file
   TString outname = inname;
-  outname.ReplaceAll(".root", "_topmistag_0.87.root");
+  outname.ReplaceAll(".root", "_topmistag_0.83.root");
   TFile* outfile = new TFile(outname, "RECREATE");
 
   // nuisance parameter for top-mistag on W+jets
