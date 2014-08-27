@@ -106,13 +106,13 @@ def build_model(type, mcstat = True):
     if type == 'narrow_resonances':
 
         model_ljets = build_boosted_semileptonic_model(
-            ['ljets_all_topmistag_0.87.root'],
+            ['ljets_all.root'],
             narrow_resonances,
             'Zprime*',
             mcstat
         )
         model_cmstt = build_boosted_allhadronic_CMSTT_model(
-            ['CMSTT_zpn_rebinned.root'],
+            ['CMSTT_zpn.root'],
             narrow_resonances,
             'Zprime*',
             mcstat
