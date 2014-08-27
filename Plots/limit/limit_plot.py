@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from ROOT import ROOT, TCanvas, TColor, TGraph, TLegend, TPaveText
+from ROOT import ROOT, TCanvas, TColor, TGraph, TLegend, TPaveText, TString, TLine
 from read_input_file import *
 from theory_XsecBR import *
 
@@ -36,6 +36,18 @@ def limit_canvas(limits_, signal_, oname_):
         g95.SetPoint(a,m[a],exp95dn[a])
         g68.SetPoint(N+a,m[N-a-1],exp68up[N-a-1])
         g95.SetPoint(N+a,m[N-a-1],exp95up[N-a-1])
+
+    trans = 0
+    up = 0
+    if signal_ == 'n':
+        trans = 0.770776
+        up = 3
+    if signal_ == 'w':
+        trans = 0.836432
+        up = 10
+    if signal_ == 'r':
+        trans = 0.899902
+        up = 4
 
     gExp.SetLineStyle(2)
     gExp.SetLineWidth(4)
@@ -114,6 +126,14 @@ def limit_canvas(limits_, signal_, oname_):
     hr.GetYaxis().SetTitleOffset(0.98)
     hr.GetXaxis().SetLabelSize(0.045)
     hr.GetYaxis().SetLabelSize(0.045)
+
+    name = TString(oname_)
+    if name.Contains("com"):
+        tl = TLine(trans, 1e-3, trans, up)
+        tl.SetLineStyle(ROOT.kDashed)
+        tl.SetLineColor(ROOT.kGray+1)
+        tl.SetLineWidth(3)
+        tl.Draw()
 
     c.Update()
     text_TL.Draw('same')
