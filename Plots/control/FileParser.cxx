@@ -247,6 +247,18 @@ void FileParser::BrowseFile()
 
 	// histogram found
 	TH1* thist = (TH1*) obj;
+
+	//cout << "name = " << thist->GetName() << " title = " << thist->GetTitle() << " dirname = " << dirname << endl;
+	TString name(thist->GetName());
+	TString title(thist->GetTitle());
+	bool keep = false;
+	if (name=="MJet_1_ly" && title.Contains("leading topjet") && dirname=="TopJets_NoBTag") keep = true;
+	if (name=="pT_1_ly" && title.Contains("leading topjet") && dirname=="TopJets_NoBTag") keep = true;
+	if (name=="TopTag_1_tau32" && dirname=="ElecOR_1top") keep = true;
+	if (name=="TopTag_1_M" && dirname=="ElecOR_1top") keep = true;
+	if (name=="TopTag_1_mmin" && dirname=="ElecOR_1top") keep = true;
+	if (!keep) continue;
+
 	if (m_do_cumulative) MakeCumulativeHist(thist);
 	TH1* rebinned = Rebin(thist, dirname);
 	SHist* shist = NULL;
@@ -365,24 +377,26 @@ TH1* FileParser::Rebin(TH1* hist, TString dirname)
   TString title(hist->GetTitle());
 
   // used to get control distributions for W+jet sample in paper B2G-13-008
-//   if (name.Contains("pT_1") && title.Contains("topjet")){// && dirname.Contains("cutflow6") && title.Contains("electron")){
+  if (name.Contains("pT_1") && title.Contains("topjet")){// && dirname.Contains("cutflow6") && title.Contains("electron")){
     
-//     TH1* rebinned = hist->Rebin(2);
-//     rebinned->GetXaxis()->SetRangeUser(0,1400);
-//     rebinned->SetTitle("p_{T} [GeV]");
-//     int end = hist->GetXaxis()->FindBin(401);
-//     for (int i=1; i<end; ++i){
-//       hist->SetBinContent(i, 0);
-//       hist->SetBinError(i, 0);
-//     }
-//     return rebinned;
+    TH1* rebinned = hist->Rebin(2);
+    rebinned->GetXaxis()->SetRangeUser(400,1400);
+    rebinned->SetTitle("p_{T} [GeV]");
+    int end = hist->GetXaxis()->FindBin(401);
+    for (int i=1; i<end; ++i){
+      hist->SetBinContent(i, 0);
+      hist->SetBinError(i, 0);
+    }
+    return rebinned;
 
-//   } else if (name.Contains("MJet") && title.Contains("topjet")) {
+  } else if (name.Contains("MJet") && title.Contains("topjet")) {
     
-//     TH1* rebinned = hist->Rebin(2);
-//     rebinned->GetXaxis()->SetRangeUser(0,300);
-//     rebinned->SetTitle("M_{jet} [GeV]");
-//     return rebinned;
+    TH1* rebinned = hist->Rebin(2);
+    rebinned->GetXaxis()->SetRangeUser(0,300);
+    rebinned->SetTitle("M_{jet} [GeV]");
+    return rebinned;
+
+  }
 
 //   } else if (name.Contains("MET")) {
     
@@ -410,14 +424,15 @@ TH1* FileParser::Rebin(TH1* hist, TString dirname)
   if (name.Contains("TopTag_1_M")){
     TH1* rebinned = (TH1*) hist->Clone();
     rebinned->SetTitle("M_{jet} [GeV]");
-    rebinned->GetXaxis()->SetRangeUser(100,300);
+    rebinned->GetXaxis()->SetRangeUser(130,260);
     return rebinned;
   }
 
   if (name.Contains("TopTag_1_mmin")){
     TH1* rebinned = hist->Rebin(2);
+    //TH1* rebinned = (TH1*) hist->Clone();
     rebinned->SetTitle("M_{min} [GeV]");
-    rebinned->GetXaxis()->SetRangeUser(0,200);
+    rebinned->GetXaxis()->SetRangeUser(40,160);
     return rebinned;
   }
 
@@ -437,7 +452,8 @@ TH1* FileParser::Rebin(TH1* hist, TString dirname)
 
   if (name.Contains("tau32")){
     TH1* rebinned = (TH1*) hist->Clone();
-    rebinned->SetTitle("#tau_{3} / #tau_{2}");
+    rebinned->SetTitle("#tau_{32}");
+    rebinned->GetXaxis()->SetRangeUser(0,0.7);
     return rebinned;
   }
 

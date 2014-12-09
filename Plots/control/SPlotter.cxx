@@ -1117,22 +1117,22 @@ vector<SHist*> SPlotter::CalcRatios(vector<SHist*> hists)
 
   MCstat->SetMarkerStyle(0);
   MCstat->SetMarkerSize(0);
-  MCstat->SetLineColor(LightGray);
+  MCstat->SetLineColor(MLightGray);
   if (bIgnoreEmptyBins){
     MCstat->SetLineColor(kBlack);
     MCstat->SetLineStyle(kDashed);
   }
-  MCstat->SetFillColor(LightGray);
+  MCstat->SetFillColor(MLightGray);
 
   MCtot->SetMarkerStyle(0);
   MCtot->SetMarkerSize(0);
-  MCtot->SetLineColor(MLightGray);
-  MCtot->SetFillColor(MLightGray);
+  MCtot->SetLineColor(LightGray);
+  MCtot->SetFillColor(LightGray);
 
   eAsym->SetMarkerStyle(0);
   eAsym->SetMarkerSize(0);
-  eAsym->SetLineColor(MLightGray);
-  eAsym->SetFillColor(MLightGray);
+  eAsym->SetLineColor(LightGray);
+  eAsym->SetFillColor(LightGray);
 
   if (m_shapesys_arr.size()!=0){
     mctot->SetAsymmErrors(eAsym);
@@ -1314,13 +1314,13 @@ vector<SHist*> SPlotter::CalcZScore(vector<SHist*> hists)
 
   MCstat->SetMarkerStyle(0);
   MCstat->SetMarkerSize(0);
-  MCstat->SetLineColor(LightGray);
-  MCstat->SetFillColor(LightGray);
+  MCstat->SetLineColor(MLightGray);
+  MCstat->SetFillColor(MLightGray);
 
   MCtot->SetMarkerStyle(0);
   MCtot->SetMarkerSize(0);
-  MCtot->SetLineColor(MLightGray);
-  MCtot->SetFillColor(MLightGray);
+  MCtot->SetLineColor(LightGray);
+  MCtot->SetFillColor(LightGray);
 
   scores.push_back(mctot);
   scores.push_back(mcerr);

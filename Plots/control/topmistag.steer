@@ -1,7 +1,7 @@
 SteerPlotter(){
   
   // steering for the plotter
-  fCycleName     = "/nfs/dust/cms/user/kogler/Zprime/topmistagrate/topmistag";
+  fCycleName     = "topmistag/topmistag";
   fInputFiles    = "  data.root,  ttbar.root,      wjets.root,     ,       stop.root,   dyjets.root, diboson.root";
   fSampleNames   = "  Data,  t #bar t, W+light,     , single-top,   Z+jets, diboson";
   fSamplesWeight = "  1.0 ,   0.87,      0.87,     ,      0.87,       0.87,    0.87";
@@ -28,7 +28,7 @@ SteerPlotter(){
   //fScaleSysUnc    = "  q2, q2_wjets, matching_wjets,    pdf, toptag, topmistag, eleid, muoid, pileup,  jec,  jer, btag, bmistag";
   //fSysUncWeight   = "0.47,    0.151,           0.16,   0.22,   0.17,      0.59,  0.95,  0.49,   0.52,  0.09, 0.11, 0.53,    0.70";
 
-  fOutputPsFile = "/nfs/dust/cms/user/kogler/Zprime/topmistagrate/plots/eps/topmistag.ps";
+  fOutputPsFile = "topmistag_plots/topmistag.ps";
 
   bRatioPlot = true;   // plot ratio histograms?
 //bZScoreInRatio = false;   // plot z-score instead of usual ratio
