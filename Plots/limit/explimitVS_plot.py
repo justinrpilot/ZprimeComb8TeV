@@ -97,11 +97,11 @@ for s in signal_dict:
 
     input_tuple = (
       ('txt/limits_'+s+'_dil_0731.txt', 'dilepton'          , 1, ROOT.kViolet),
-      ('txt/limits_'+s+'_ltr.txt'     , 'l+jets (threshold)', 1, ROOT.kOrange+1),
-      ('txt/limits_'+s+'_lep_0731.txt', 'l+jets (boosted)'  , 1, ROOT.kRed),
-      ('txt/limits_'+s+'_htt_0731.txt', 'hadronic (HEPTT)'  , 1, ROOT.kBlue),
-      ('txt/limits_'+s+'_ctt_0731.txt', 'hadronic (CMSTT)'  , 1, ROOT.kGreen+1),
-      ('txt/limits_'+s+'_B2G13001.txt', 'B2G-13-001'        , 2, ROOT.kGray+1),
+      ('txt/limits_'+s+'_ltr.txt'     , 'lepton+jets (threshold)', 1, ROOT.kOrange+1),
+      ('txt/limits_'+s+'_lep_0731.txt', 'lepton+jets (boosted)'  , 1, ROOT.kRed),
+      ('txt/limits_'+s+'_htt_0731.txt', 'all-hadronic (low mass)'  , 1, ROOT.kBlue),
+      ('txt/limits_'+s+'_ctt_0731.txt', 'all-hadronic (high mass)'  , 1, ROOT.kGreen+1),
+      #('txt/limits_'+s+'_B2G13001.txt', 'B2G-13-001'        , 2, ROOT.kGray+1),
       ('txt/limits_'+s+'_com_0731.txt', 'combination'       , 1, ROOT.kBlack)
     )
 
