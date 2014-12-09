@@ -1,13 +1,13 @@
 SteerPlotter(){
   
   // steering for the plotter
-  fCycleName     = "HEPTT_zpn_scaled.root";
-  fInputFiles    = "  DATA,  ttbar,     qcd,   Zprime1000";
-  fSampleNames   = "  Data,  t #bar t,  NTMJ, Z'_1.0_TeV ";
-  fSamplesWeight = "  1.0 ,    1.00,    1.00,       1.00 "; // samples are already scaled
-  fSamplesUnc    = "  0.0 ,   0.042,     0.0,        0.0 ";
-  fHistColors    = "  1   ,     629,     798,          1 ";
-  fHistMarkers   = " 20   ,       0,      0,          -1 ";
+  fCycleName     = "mttbar_input_1119/HEPTT_zpn_0911_norebin_scaled.root";
+  fInputFiles    = "  DATA,    qcd,  ttbar,      Zprime1000";
+  fSampleNames   = "  Data,    NTMJ, t #bar t,   Z'_1.0_TeV_1%_width ";
+  fSamplesWeight = "  1.0 ,    1.00,   1.00,          1.00 "; // samples are already scaled
+  fSamplesUnc    = "  0.0 ,     0.0,  0.042,           0.0 ";
+  fHistColors    = "  1   ,     798,    629,             1 ";
+  fHistMarkers   = " 20   ,      0,       0,            -1 ";
 
   // fInputFiles    = "  DATA,   wlight,     wc,     wb,   singletop,  zlight, diboson,     ttbar, Zprime2000";
   // fSampleNames   = "  Data,   W+light,   W+c,    W+b,   single-top, Z+jets, diboson,  t #bar t, Z'_2.0_TeV";
@@ -26,7 +26,7 @@ SteerPlotter(){
   fSamplesToStack = "qcd, ttbar"; // the names of chains which you would like to stack (same as in input filenames)
 
   fScaleSysUnc    = "  jec,  subjbtaghtt, subjbtaglighthtt,   htt,  subjec,  heptrig,     q2,   pdf,   jer";
-  fSysUncWeight   = " 0.09,         1.47,             1.02,  0.64,    0.26,     0.47,   0.47,  0.22,  0.11";
+  fSysUncWeight   = " 0.09,         1.47,             1.02,  0.64,    0.26,     0.47,   0.47,  0.22,  0.13";
 
   fOutputPsFile = "allhad/htt_scaled.ps";
 

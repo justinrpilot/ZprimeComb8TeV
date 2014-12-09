@@ -1,13 +1,13 @@
 SteerPlotter(){
   
   // steering for the plotter
-  fCycleName     = "dilep_1pctZprime_50GeVbin_scaled_combined.root";
-  fInputFiles    = "  DATA,  ttbar,     singletop, zlight,   diboson, Zprime2000";
-  fSampleNames   = "  Data,  t #bar t, single-top, Z+jets,   diboson, Z'_2.0_TeV ";
-  fSamplesWeight = "  1.0 ,    1.00,        1.00 ,    1.00 ,    1.00, 1.00 "; // samples are already scaled
-  fSamplesUnc    = "  0.0 ,   0.042,        0.25 ,    0.49 ,    0.20,  0.0 ";
-  fHistColors    = "  1   ,     629,         861 ,     861 ,     861,    1 ";
-  fHistMarkers   = " 20   ,       0,           0 ,       0 ,       0,   -1 ";
+  fCycleName     = "mttbar_input_1119/dilep_zpn_0911_norebin_scaled.root";
+  fInputFiles    = "  DATA,     singletop,   zlight,   diboson,    ttbar, Zprime2000";
+  fSampleNames   = "  Data,    single-top,   Z+jets,   diboson, t #bar t, Z'_2.0_TeV_1%_width ";
+  fSamplesWeight = "  1.0 ,         1.00 ,    1.00 ,    1.00,       1.00, 1.00 "; // samples are already scaled
+  fSamplesUnc    = "  0.0 ,         0.25 ,    0.49 ,    0.20,      0.042,  0.0 ";
+  fHistColors    = "  1   ,          413 ,     413 ,     413,        629,   1 ";
+  fHistMarkers   = " 20   ,            0 ,       0 ,       0,          0,  -1 ";
 
   // fInputFiles    = "  DATA,   wlight,     wc,     wb,   singletop,  zlight, diboson,     ttbar, Zprime2000";
   // fSampleNames   = "  Data,   W+light,   W+c,    W+b,   single-top, Z+jets, diboson,  t #bar t, Z'_2.0_TeV";

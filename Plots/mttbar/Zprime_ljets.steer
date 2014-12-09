@@ -1,13 +1,13 @@
 SteerPlotter(){
   
   // steering for the plotter
-  fCycleName     = "ljets_notrebinned_topmistag_0.87_scaled.root";
-  fInputFiles    = "  DATA,  ttbar,     wlight,      wc,        wb   ,  singletop,   zlight, diboson, Zprime2000";
-  fSampleNames   = "  Data,  t #bar t, W+light,     W+c,       W+b   , single-top,   Z+jets, diboson, Z'_2.0_TeV ";
-  fSamplesWeight = "  1.0 ,    1.00,      0.90,    0.90,      0.90   ,      1.00 ,    1.00 ,    1.00, 1.00 "; // W+jets scaled down by q2 scale uncertainty
-  fSamplesUnc    = "  0.0 ,   0.042,     0.063,    0.30,      0.23   ,      0.25 ,    0.25 ,    0.20,  0.0 ";
-  fHistColors    = "  1   ,     629,       413,     413,       413   ,       861 ,     861 ,     861,    1 ";
-  fHistMarkers   = " 20   ,       0,         0,       0,         0   ,         0 ,       0 ,       0,   -1 ";
+  fCycleName     = "mttbar_input_1119/ljets_all_0911_norebin_scaled.root";
+  fInputFiles    = "  DATA,      wlight,      wc,        wb   ,  singletop,   zlight, diboson,     ttbar,  Zprime2000 ";
+  fSampleNames   = "  Data,     W+light,     W+c,       W+b   , single-top,   Z+jets, diboson,  t #bar t,  Z'_2.0_TeV_1%_width ";
+  fSamplesWeight = "  1.0 ,         1.0,     1.0,       1.0   ,      1.00 ,    1.00 ,    1.00,      1.00,        1.00 "; // W+jets scaled down by q2 scale uncertainty
+  fSamplesUnc    = "  0.0 ,       0.058,    0.30,      0.23   ,      0.25 ,    0.31 ,    0.20,     0.035,         0.0 ";
+  fHistColors    = "  1   ,         413,     413,       413   ,       413 ,     413 ,     413,       629,           1 ";
+  fHistMarkers   = " 20   ,           0,       0,         0   ,         0 ,       0 ,       0,         0,          -1 ";
 
   // fInputFiles    = "  DATA,   wlight,     wc,     wb,   singletop,  zlight, diboson,     ttbar, Zprime2000";
   // fSampleNames   = "  Data,   W+light,   W+c,    W+b,   single-top, Z+jets, diboson,  t #bar t, Z'_2.0_TeV";
@@ -26,7 +26,7 @@ SteerPlotter(){
   fSamplesToStack = "wlight, wc, wb, singletop, zlight, diboson, ttbar"; // the names of chains which you would like to stack (same as in input filenames)
 
   fScaleSysUnc    = "  q2, q2_wjets, matching_wjets,    pdf, toptag, topmistag, eleid, muoid, pileup,  jec,  jer, btag, bmistag";
-  fSysUncWeight   = "0.47,    0.151,           0.16,   0.22,   0.17,      0.59,  0.95,  0.49,   0.52,  0.09, 0.11, 0.53,    0.70";
+  fSysUncWeight   = "0.47,    0.151,           0.16,   0.22,   0.21,      0.96,  0.99,  0.67,   0.58,  0.09, 0.13, 0.61,   1.08";
 
   fOutputPsFile = "ljets/ljets.ps";
 
