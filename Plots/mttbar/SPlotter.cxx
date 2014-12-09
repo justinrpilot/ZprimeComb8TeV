@@ -1249,7 +1249,7 @@ vector<SHist*> SPlotter::CalcRatios(vector<SHist*> hists)
     eAsym -> SetPointError(ibin, ex_low, ex_up, ey_low, ey_up); 
 
     // set error to 0 for empty bins
-    if (bIgnoreEmptyBins && val<0.1){
+    if (bIgnoreEmptyBins && val<0.1 && ibin<15){
       //cout << "no MC in bin " << ibin << " lower = " << denom->GetXaxis()->GetBinLowEdge(ibin) << " upper = " << denom->GetXaxis()->GetBinUpEdge(ibin) << endl;
       MCstat->SetBinError(ibin, 0.);
       MCtot->SetBinError(ibin, 0.);
@@ -1265,22 +1265,22 @@ vector<SHist*> SPlotter::CalcRatios(vector<SHist*> hists)
 
   MCstat->SetMarkerStyle(0);
   MCstat->SetMarkerSize(0);
-  MCstat->SetLineColor(LightGray);
+  MCstat->SetLineColor(MLightGray);
   if (bIgnoreEmptyBins){
     MCstat->SetLineColor(kBlack);
     MCstat->SetLineStyle(kDashed);
   }
-  MCstat->SetFillColor(LightGray);
+  MCstat->SetFillColor(MLightGray);
 
   MCtot->SetMarkerStyle(0);
   MCtot->SetMarkerSize(0);
-  MCtot->SetLineColor(MLightGray);
-  MCtot->SetFillColor(MLightGray);
+  MCtot->SetLineColor(LightGray);
+  MCtot->SetFillColor(LightGray);
 
   eAsym->SetMarkerStyle(0);
   eAsym->SetMarkerSize(0);
-  eAsym->SetLineColor(MLightGray);
-  eAsym->SetFillColor(MLightGray);
+  eAsym->SetLineColor(LightGray);
+  eAsym->SetFillColor(LightGray);
 
   if (m_shapesys_arr.size()!=0){
     mctot->SetAsymmErrors(eAsym);
@@ -1462,13 +1462,13 @@ vector<SHist*> SPlotter::CalcZScore(vector<SHist*> hists)
 
   MCstat->SetMarkerStyle(0);
   MCstat->SetMarkerSize(0);
-  MCstat->SetLineColor(LightGray);
-  MCstat->SetFillColor(LightGray);
+  MCstat->SetLineColor(MLightGray);
+  MCstat->SetFillColor(MLightGray);
 
   MCtot->SetMarkerStyle(0);
   MCtot->SetMarkerSize(0);
-  MCtot->SetLineColor(MLightGray);
-  MCtot->SetFillColor(MLightGray);
+  MCtot->SetLineColor(LightGray);
+  MCtot->SetFillColor(LightGray);
 
   scores.push_back(mctot);
   scores.push_back(mcerr);
@@ -1495,8 +1495,8 @@ void SPlotter::DrawLegend(vector<SHist*> hists)
   }
   float ysize = yfrac*narr;
   float xleft = 0.7;
-  if (bSingleEPS) xleft = 0.7;
-  float xright = 0.92;
+  if (bSingleEPS) xleft = 0.55;
+  float xright = 0.88;
   if (!bPortrait){
     top = 0.99;
     ysize = 0.07*narr;
@@ -1511,17 +1511,23 @@ void SPlotter::DrawLegend(vector<SHist*> hists)
     top = 0.78;
   }
 
-  ysize = 0.07*5;
+  ysize = 0.06*4;
   TLegend *leg = new TLegend(xleft,top-ysize,xright,top, NULL,"brNDC");
   leg->SetFillColor(0);
   leg->SetLineColor(1);
   leg->SetBorderSize(0);
   leg->SetTextFont(42);
   leg->SetFillStyle(0);
-  if (bSingleEPS) leg->SetTextSize(0.045);
+  if (bSingleEPS) leg->SetTextSize(0.05);
+
+  // do the ordering by hand
+  //Int_t j[] = {0, 4, 1, 2, 3, 5, 6}; // dilepton
+  Int_t j[] = {0, 2, 1, 3, 4}; // CMSTT
+  //Int_t j[] = {0, 7, 1, 2, 3, 4, 5, 6, 8, 9}; // l+jets case
 
   for (Int_t i=0; i<narr; ++i){
-    SHist* sh = hists[i];
+
+    SHist* sh = hists[j[i]];
     if (sh->IsStack()) continue;
 
     TString legname = TString::Format("leg_entry_%i",i);
@@ -1530,12 +1536,15 @@ void SPlotter::DrawLegend(vector<SHist*> hists)
     int marker = sh->GetHist()->GetMarkerStyle();
     int lstyle = sh->GetHist()->GetLineStyle();
 
-    if (legtitle=="W+light") legtitle = "W(#rightarrow l #nu)+jets";
+    if (legtitle=="W+light") continue; //legtitle = "W(#rightarrow l #nu)+jets";
     if (legtitle=="W+c") continue;
     if (legtitle=="W+b") continue;
     if (legtitle=="single-top") legtitle = "others";
     if (legtitle=="Z+jets") continue;
     if (legtitle=="diboson") continue;
+
+    legtitle.ReplaceAll("TeV 1%", "TeV, 1%");
+    legtitle.Prepend(" ");
 
     if (marker>0){
       entry = leg->AddEntry(legname, legtitle, "lpe");
@@ -1573,22 +1582,51 @@ void SPlotter::DrawLegend(vector<SHist*> hists)
   // auxiliary text
   TString name = hists[0]->GetName();
   TString infotext;
-  if (name.Contains("el_0top0btag")) infotext = "e+jets, N_{b-tag} = 0, N_{top-tag} = 0";
-  if (name.Contains("el_0top1btag")) infotext = "e+jets, N_{b-tag} #geq 1, N_{top-tag} = 0";
-  if (name.Contains("el_1top")) infotext = "e+jets, N_{top-tag} = 1";
+  if (name.Contains("el_0top0btag")) infotext = "e+jets; 0 top-tag, 0 b-tag";
+  if (name.Contains("el_0top1btag")) infotext = "e+jets; 0 top-tag, 1 b-tag";
+  if (name.Contains("el_1top")) infotext = "e+jets; 1 top-tag";
 
-  if (name.Contains("mu_0top0btag")) infotext = "#mu+jets, N_{b-tag} = 0, N_{top-tag} = 0";
-  if (name.Contains("mu_0top1btag")) infotext = "#mu+jets, N_{b-tag} #geq 1, N_{top-tag} = 0";
-  if (name.Contains("mu_1top")) infotext = "#mu+jets, N_{top-tag} = 1";
+  if (name.Contains("mu_0top0btag")) infotext = "#mu+jets, 0 top-tag, 0 b-tag";
+  if (name.Contains("mu_0top1btag")) infotext = "#mu+jets, 0 top-tag, 1 b-tag";
+  if (name.Contains("mu_1top")) infotext = "#mu+jets, 1 top-tag";
+
+  if (name.Contains("ee")) infotext = "ee";
+  if (name.Contains("mumu")) infotext = "#mu#mu";
+  if (name.Contains("emu")) infotext = "e#mu";
+
+  if (name == "btag0") infotext = "|#Deltay < 1.0|; 0 b-tag (high mass)";
+  if (name == "btag1") infotext = "|#Deltay < 1.0|; 1 b-tag (high mass)";
+  if (name == "btag2") infotext = "|#Deltay < 1.0|; 2 b-tag (high mass)";
+  if (name == "btag3") infotext = "|#Deltay > 1.0|; 0 b-tag (high mass)";
+  if (name == "btag4") infotext = "|#Deltay > 1.0|; 1 b-tag (high mass)";
+  if (name == "btag5") infotext = "|#Deltay > 1.0|; 2 b-tag (high mass)";
+
+  if (name == "httbtag0") infotext = "H_{T} > 800 GeV; 0 b-tag (low mass)";
+  if (name == "httbtag1") infotext = "H_{T} > 800 GeV; 1 b-tag (low mass)";
+  if (name == "httbtag2") infotext = "H_{T} > 800 GeV; 2 b-tag (low mass)";
+  if (name == "mjhttbtag0") infotext = "H_{T} < 800 GeV; 0 b-tag (low mass)";
+  if (name == "mjhttbtag1") infotext = "H_{T} < 800 GeV; 1 b-tag (low mass)";
+  if (name == "mjhttbtag2") infotext = "H_{T} < 800 GeV; 2 b-tag (low mass)";
+
+  cout << name << endl;
 
   TLatex *text1 = new TLatex(3.5, 24, infotext);
   text1->SetNDC();
   text1->SetTextAlign(13);
-  text1->SetX(0.23);
+  text1->SetX(0.20);
   text1->SetTextFont(42);
-  text1->SetTextSize(0.055);
-  text1->SetY(0.87);
-  //text1->Draw(); // Thomas: could add text here
+  text1->SetTextSize(0.06);
+  text1->SetY(0.98);
+
+  if (name.BeginsWith("btag") || name.BeginsWith("htt") || name.BeginsWith("mjhtt")){
+    text1->SetX(0.19);
+    text1->SetTextSize(0.053);
+    text1->SetY(0.99);
+  }
+  if (name.BeginsWith("el_") || name.BeginsWith("mu_")){
+    text1->SetY(0.995);
+  }
+  text1->Draw();
   
 }
 
@@ -1724,6 +1762,14 @@ bool SPlotter::SetMinMax(vector<SHist*> hists)
     uscale = 12.;
   }
 
+  if (name == "el_1top_mttbar"){
+    uscale = 20.;
+  }
+
+  if (name == "mu_1top_mttbar"){
+    uscale = 20.;
+  }
+
   for (int i=0; i<narr; ++i){
     SHist* h = hists[i];
     if (h->IsStack()){ 
@@ -1754,6 +1800,7 @@ bool SPlotter::SetMinMax(vector<SHist*> hists)
       h->GetHist()->SetMaximum(uscale*max);
     }
   }  
+
 
   return isok;
 }
