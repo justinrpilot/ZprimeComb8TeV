@@ -179,7 +179,7 @@ void draw(TString fname = "qcdClosure_lowDY.root", int lohiDY = 0)
   //text3->Draw();
 
   //TLegend *leg = new TLegend(0.4,0.675,0.73,0.845, NULL,"brNDC");
-  TLegend *leg = new TLegend(0.43,0.65,0.73,0.845, NULL,"brNDC");
+  TLegend *leg = new TLegend(0.4,0.65,0.73,0.845, NULL,"brNDC");
   leg->SetFillColor(0);
   leg->SetLineColor(1);
   leg->SetBorderSize(0);
