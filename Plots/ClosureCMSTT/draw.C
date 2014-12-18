@@ -183,14 +183,19 @@ void draw(TString fname = "qcdClosure_lowDY.root", int lohiDY = 0)
   text3->SetY(0.73);
   //text3->Draw();
 
-  TLegend *leg = new TLegend(0.47,0.65,0.73,0.845, NULL,"brNDC");
+  TString lheader = "";
+  if (lohiDY == 0) lheader = "0+1+2 b-tags, |#Deltay| < 1.0";
+  else lheader = "0+1+2 b-tags, |#Deltay| > 1.0";
+  TLegend *leg = new TLegend(0.52,0.63,0.73,0.83, lheader,"brNDC");
+  TLegendEntry *header = (TLegendEntry*)leg->GetListOfPrimitives()->First();
+  header->SetTextFont(42);
+  header->SetTextSize(0.06);
+
   leg->SetFillColor(0);
   leg->SetLineColor(1);
   leg->SetBorderSize(0);
   leg->SetTextFont(42);
   leg->SetFillStyle(0);
-  if (lohiDY == 0) leg->AddEntry(totalH, "0+1+2 b-tags, |#Deltay| < 1.0", "");
-  else leg->AddEntry(totalH, "0+1+2 b-tags, |#Deltay| > 1.0", "");
   TLegendEntry* dleg = leg->AddEntry(data_eff, "Selected QCD", "lpe");
   TLegendEntry* dmc = leg->AddEntry(mc_eff, "Predicted QCD", "f");
 

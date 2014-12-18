@@ -182,7 +182,7 @@ void draw(TString fname = "qcdClosure_lowDY.root", int lohiDY = 0)
   TString lheader = "";
   if (lohiDY == 0) lheader = "0+1+2 b-tags, H_{T} > 800 GeV";
   else lheader = "0+1+2 b-tags, H_{T} < 800 GeV";
-  TLegend *leg = new TLegend(0.45,0.65,0.73,0.83, lheader,"brNDC");
+  TLegend *leg = new TLegend(0.45,0.63,0.73,0.83, lheader,"brNDC");
   TLegendEntry *header = (TLegendEntry*)leg->GetListOfPrimitives()->First();
   header->SetTextFont(42);
   header->SetTextSize(0.06);
