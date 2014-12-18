@@ -108,7 +108,7 @@ void draw(TString fname = "qcdClosure_lowDY.root", int lohiDY = 0)
     data_eff->GetYaxis()->SetRangeUser(0.3, 1000);
   }  else { 
     cout << "setting lower y-range" << endl;
-    data_eff->GetYaxis()->SetRangeUser(0.0003, 10000);
+    data_eff->GetYaxis()->SetRangeUser(0.0003, 100000);
   }
 
   data_eff->GetXaxis()->SetTickLength(0.05);

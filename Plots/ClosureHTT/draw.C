@@ -102,7 +102,7 @@ void draw(TString fname = "qcdClosure_lowDY.root", int lohiDY = 0)
   data_eff->SetTitle("");
   data_eff->GetXaxis()->SetRangeUser(250, 3000);
   data_eff->GetYaxis()->SetRangeUser(0.02, 100000);
-  if (lohiDY == 1) data_eff->GetYaxis()->SetRangeUser(0.02, 1000000);
+  if (lohiDY == 1) data_eff->GetYaxis()->SetRangeUser(0.02, 10000000);
 
 
   data_eff->GetXaxis()->SetTickLength(0.05);
