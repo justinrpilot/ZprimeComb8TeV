@@ -71,6 +71,8 @@ tex->SetNDC();
    axis__7->GetZaxis()->SetTitleFont(42);
    axis__7->Draw("sameaxis");
    Double_t xAxis7[17] = {150, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400, 450, 500, 600, 800, 2000}; 
+
+   TFile* file = new TFile("mistag_QuadJet.root", "RECREATE");
    
    TH1D *Mistag_px4 = new TH1D("Mistag_px4","",16, xAxis7);
    Mistag_px4->SetBinContent(1,0.1025104);
@@ -268,6 +270,9 @@ tex->SetNDC();
    Mistag_px2->GetZaxis()->SetTitleSize(0.035);
    Mistag_px2->GetZaxis()->SetTitleFont(42);
    Mistag_px2->Draw("hist E same");
+   
+   file->Write();
+   file->Close();
    
    TLegend *leg = new TLegend(0.15,0.15,0.8,0.55,NULL,"brNDC");
    leg->SetBorderSize(0);

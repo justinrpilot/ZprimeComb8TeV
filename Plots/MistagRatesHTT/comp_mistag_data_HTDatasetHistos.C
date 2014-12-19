@@ -72,6 +72,8 @@ tex->SetNDC();
    axis__1->Draw("sameaxis");
    Double_t xAxis1[17] = {150, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400, 450, 500, 600, 800, 2000}; 
    
+   TFile* file = new TFile("mistag_HT.root", "RECREATE");
+
    TH1D *Mistag_px4 = new TH1D("Mistag_px4","",16, xAxis1);
    Mistag_px4->SetBinContent(1,0.1167392);
    Mistag_px4->SetBinContent(2,0.1127143);
@@ -281,6 +283,14 @@ tex->SetNDC();
    Mistag_px2->GetZaxis()->SetTitleSize(0.035);
    Mistag_px2->GetZaxis()->SetTitleFont(42);
    Mistag_px2->Draw("hist E same");
+
+   //Mistag_px4->Write();
+   //Mistag_px3->Write();
+   //Mistag_px2->Write();
+   file->Write();
+   file->Close();
+   
+
    
    TLegend *leg = new TLegend(0.15,0.15,0.8,0.55,NULL,"brNDC");
    leg->SetBorderSize(0);

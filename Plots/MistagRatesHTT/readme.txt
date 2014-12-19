@@ -1,2 +1,1 @@
-root -l comp_mistag_data_HTDatasetHistos.C
-root -l comp_mistag_data_QuadJetDatasetHistos.C
+root -l -b -q plotMistagMatrixRates.C
