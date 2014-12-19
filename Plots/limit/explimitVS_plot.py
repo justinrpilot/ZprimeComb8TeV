@@ -93,16 +93,44 @@ def explimitVS_plot(input_dict_, signal_, oname_):
 
 ###
 
+c_BlueT0        = TColor.GetColor( "#112288" );
+c_BlueT1        = TColor.GetColor( "#2255cc" );
+c_BlueT2        = TColor.GetColor( "#4488dd" );
+c_BlueT3        = TColor.GetColor( "#99bbff" );
+c_BlueT4        = TColor.GetColor( "#99bbff" );
+c_BlueT5        = TColor.GetColor( "#aaddff" );
+
+c_RedT0         = TColor.GetColor( "#660000" );
+c_RedT1         = TColor.GetColor( "#B20000" );
+c_RedT2         = TColor.GetColor( "#FF0000" );
+c_RedT3         = TColor.GetColor( "#FF4D4D" );
+c_RedT4         = TColor.GetColor( "#FF9999" );
+c_RedT5         = TColor.GetColor( "#FFCCCC" );
+
+c_LightOrange   = TColor.GetColor( "#ffcc00" );
+c_VLightOrange  = TColor.GetColor( "#ffdd44" );
+c_FaintOrange   = TColor.GetColor( "#FFEBCD" );
+c_MediumOrange  = TColor.GetColor( "#FFCC00" );
+c_DarkOrange    = TColor.GetColor( "#ff6600" );
+c_VDarkOrange   = TColor.GetColor( "#aa4400" );
+
+c_GreenT0       = TColor.GetColor( "#142907" );
+c_GreenT1       = TColor.GetColor( "#29520E" );
+c_GreenT2       = TColor.GetColor( "#478F18" );
+c_GreenT3       = TColor.GetColor( "#66CC22" );
+c_GreenT4       = TColor.GetColor( "#94DB64" );
+c_GreenT5       = TColor.GetColor( "#C2EBA7" );
+
 for s in signal_dict:
 
     input_tuple = (
-      ('txt/limits_'+s+'_dil_0731.txt', 'dilepton'          , 1, ROOT.kViolet),
-      ('txt/limits_'+s+'_ltr.txt'     , 'lepton+jets (threshold)', 1, ROOT.kOrange+1),
-      ('txt/limits_'+s+'_lep_0731.txt', 'lepton+jets (boosted)'  , 1, ROOT.kRed),
-      ('txt/limits_'+s+'_htt_0731.txt', 'all-hadronic (low mass)'  , 1, ROOT.kBlue),
-      ('txt/limits_'+s+'_ctt_0731.txt', 'all-hadronic (high mass)'  , 1, ROOT.kGreen+1),
+      ('txt/limits_'+s+'_com_0731.txt', 'combination'       , 1, ROOT.kBlack),
+      ('txt/limits_'+s+'_dil_0731.txt', 'dilepton'          , 1, c_GreenT3),
+      ('txt/limits_'+s+'_ltr.txt'     , 'lepton+jets (threshold)', 2, c_BlueT3),
+      ('txt/limits_'+s+'_lep_0731.txt', 'lepton+jets (boosted)'  , 1, c_BlueT1),
+      ('txt/limits_'+s+'_htt_0731.txt', 'all-hadronic (low-mass)'  , 2, c_DarkOrange),
+      ('txt/limits_'+s+'_ctt_0731.txt', 'all-hadronic (high-mass)'  , 1, c_RedT1)
       #('txt/limits_'+s+'_B2G13001.txt', 'B2G-13-001'        , 2, ROOT.kGray+1),
-      ('txt/limits_'+s+'_com_0731.txt', 'combination'       , 1, ROOT.kBlack)
     )
 
     explimitVS_plot(input_tuple, s, s+'_explimitVS')
