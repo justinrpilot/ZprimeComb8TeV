@@ -149,8 +149,11 @@
     leg2->SetLineColor(0);
     leg2->Draw("same");
     
-    CMS_lumi(can, 2, 10, "");
-    
+    if (HTBin==0)
+      CMS_lumi(can, 2, 10, "");
+    else
+      CMS_lumi(can, 23, 10, "");
+
     can->SetLogy(1);
     can->SetLogx(1);
     can->SetTickx(1);

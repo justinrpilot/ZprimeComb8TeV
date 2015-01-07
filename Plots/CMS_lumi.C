@@ -46,6 +46,10 @@ CMS_lumi( TPad* pad, int iPeriod, int iPosX, TString extText )
 	lumiText += "19.2 fb^{-1}";
 	lumiText += " (8 TeV)";
 	}
+  else if (iPeriod == 23){
+	lumiText += "18.3 fb^{-1}";
+	lumiText += " (8 TeV)";
+	}
   else if( iPeriod==3 ) 
     {
       lumiText = lumi_8TeV; 
