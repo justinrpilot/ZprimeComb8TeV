@@ -46,7 +46,7 @@ class SPlotter
   std::vector<SHist*> CalcZScore(std::vector<SHist*> hists);
   void ShapeNormalise(std::vector<SHist*> hists);
   void DrawLegend(std::vector<SHist*> hists);
-  void DrawLumi();
+  void DrawLumi(double lumi = -1);
   void DrawSysError(SHist* stack);
   double CalcNormErrorForBin(SHist* stack, int i);
   double CalcShapeSysErrorForBinFromTheta(SHist* stack, int i, TString sign);

@@ -602,7 +602,12 @@ void SPlotter::ProcessAndPlot(std::vector<TObjArray*> histarr)
 	if (!bDrawLegend) bleg = false;
       }
       // draw lumi information
-      if (bDrawLumi) DrawLumi();
+      TString hname = hists[0]->GetName();
+      if (hname.Contains("mjhtt")){
+	if (bDrawLumi) DrawLumi(18.3);
+      } else {
+	if (bDrawLumi) DrawLumi();
+      }
       // draw the ratio
       if (bPlotRatio){
 	if (bZScoreInRatio) PlotZScore(hists, ipad);
@@ -1594,19 +1599,19 @@ void SPlotter::DrawLegend(vector<SHist*> hists)
   if (name.Contains("mumu")) infotext = "#mu#mu";
   if (name.Contains("emu")) infotext = "e#mu";
 
-  if (name == "btag0") infotext = "|#Deltay < 1.0|; 0 b-tag (high mass)";
-  if (name == "btag1") infotext = "|#Deltay < 1.0|; 1 b-tag (high mass)";
-  if (name == "btag2") infotext = "|#Deltay < 1.0|; 2 b-tag (high mass)";
-  if (name == "btag3") infotext = "|#Deltay > 1.0|; 0 b-tag (high mass)";
-  if (name == "btag4") infotext = "|#Deltay > 1.0|; 1 b-tag (high mass)";
-  if (name == "btag5") infotext = "|#Deltay > 1.0|; 2 b-tag (high mass)";
+  if (name == "btag0") infotext = "|#Deltay < 1.0|; 0 b-tag (high-mass)";
+  if (name == "btag1") infotext = "|#Deltay < 1.0|; 1 b-tag (high-mass)";
+  if (name == "btag2") infotext = "|#Deltay < 1.0|; 2 b-tag (high-mass)";
+  if (name == "btag3") infotext = "|#Deltay > 1.0|; 0 b-tag (high-mass)";
+  if (name == "btag4") infotext = "|#Deltay > 1.0|; 1 b-tag (high-mass)";
+  if (name == "btag5") infotext = "|#Deltay > 1.0|; 2 b-tag (high-mass)";
 
-  if (name == "httbtag0") infotext = "H_{T} > 800 GeV; 0 b-tag (low mass)";
-  if (name == "httbtag1") infotext = "H_{T} > 800 GeV; 1 b-tag (low mass)";
-  if (name == "httbtag2") infotext = "H_{T} > 800 GeV; 2 b-tag (low mass)";
-  if (name == "mjhttbtag0") infotext = "H_{T} < 800 GeV; 0 b-tag (low mass)";
-  if (name == "mjhttbtag1") infotext = "H_{T} < 800 GeV; 1 b-tag (low mass)";
-  if (name == "mjhttbtag2") infotext = "H_{T} < 800 GeV; 2 b-tag (low mass)";
+  if (name == "httbtag0") infotext = "H_{T} > 800 GeV; 0 b-tag (low-mass)";
+  if (name == "httbtag1") infotext = "H_{T} > 800 GeV; 1 b-tag (low-mass)";
+  if (name == "httbtag2") infotext = "H_{T} > 800 GeV; 2 b-tag (low-mass)";
+  if (name == "mjhttbtag0") infotext = "H_{T} < 800 GeV; 0 b-tag (low-mass)";
+  if (name == "mjhttbtag1") infotext = "H_{T} < 800 GeV; 1 b-tag (low-mass)";
+  if (name == "mjhttbtag2") infotext = "H_{T} < 800 GeV; 2 b-tag (low-mass)";
 
   cout << name << endl;
 
@@ -1631,9 +1636,15 @@ void SPlotter::DrawLegend(vector<SHist*> hists)
 }
 
 
-void SPlotter::DrawLumi()
+void SPlotter::DrawLumi(double lumi)
 {
-  TString infotext = TString::Format("%3.1f fb^{-1} (8 TeV)", m_lumi);
+
+  TString infotext;
+  if (lumi < 0)
+    infotext = TString::Format("%3.1f fb^{-1} (8 TeV)", m_lumi);
+  else 
+    infotext = TString::Format("%3.1f fb^{-1} (8 TeV)", lumi);
+
   TLatex *text1 = new TLatex(3.5, 24, infotext);
   text1->SetNDC();
   text1->SetTextAlign(33);
@@ -2136,7 +2147,12 @@ void SPlotter::YieldCosmetics(TH1* hist)
 void SPlotter::LandscapeCosmetics(TH1* hist)
 {
 
-
+  // FIXME: need to define sensible style
+  hist->GetXaxis()->SetLabelSize(0.12);
+  hist->GetXaxis()->SetTickLength(0.08);
+  hist->GetXaxis()->SetTitleSize(0.12);
+  hist->GetXaxis()->SetTitleOffset(1.25);
+	  
 
 }
 
