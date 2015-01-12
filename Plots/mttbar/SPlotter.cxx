@@ -1599,12 +1599,12 @@ void SPlotter::DrawLegend(vector<SHist*> hists)
   if (name.Contains("mumu")) infotext = "#mu#mu";
   if (name.Contains("emu")) infotext = "e#mu";
 
-  if (name == "btag0") infotext = "|#Deltay < 1.0|; 0 b-tag (high-mass)";
-  if (name == "btag1") infotext = "|#Deltay < 1.0|; 1 b-tag (high-mass)";
-  if (name == "btag2") infotext = "|#Deltay < 1.0|; 2 b-tag (high-mass)";
-  if (name == "btag3") infotext = "|#Deltay > 1.0|; 0 b-tag (high-mass)";
-  if (name == "btag4") infotext = "|#Deltay > 1.0|; 1 b-tag (high-mass)";
-  if (name == "btag5") infotext = "|#Deltay > 1.0|; 2 b-tag (high-mass)";
+  if (name == "btag0") infotext = "|#Deltay| < 1.0; 0 b-tag (high-mass)";
+  if (name == "btag1") infotext = "|#Deltay| < 1.0; 1 b-tag (high-mass)";
+  if (name == "btag2") infotext = "|#Deltay| < 1.0; 2 b-tag (high-mass)";
+  if (name == "btag3") infotext = "|#Deltay| > 1.0; 0 b-tag (high-mass)";
+  if (name == "btag4") infotext = "|#Deltay| > 1.0; 1 b-tag (high-mass)";
+  if (name == "btag5") infotext = "|#Deltay| > 1.0; 2 b-tag (high-mass)";
 
   if (name == "httbtag0") infotext = "H_{T} > 800 GeV; 0 b-tag (low-mass)";
   if (name == "httbtag1") infotext = "H_{T} > 800 GeV; 1 b-tag (low-mass)";
