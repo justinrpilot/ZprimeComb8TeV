@@ -186,7 +186,8 @@ void draw(TString fname = "qcdClosure_lowDY.root", int lohiDY = 0)
   TString lheader = "";
   if (lohiDY == 0) lheader = "0+1+2 b-tags, |#Deltay| < 1.0";
   else lheader = "0+1+2 b-tags, |#Deltay| > 1.0";
-  TLegend *leg = new TLegend(0.52,0.63,0.73,0.83, lheader,"brNDC");
+  //TLegend *leg = new TLegend(0.52,0.63,0.73,0.83, lheader,"brNDC");
+  TLegend *leg = new TLegend(0.48,0.63,0.73,0.83, lheader,"brNDC");
   TLegendEntry *header = (TLegendEntry*)leg->GetListOfPrimitives()->First();
   header->SetTextFont(42);
   header->SetTextSize(0.06);
@@ -196,8 +197,8 @@ void draw(TString fname = "qcdClosure_lowDY.root", int lohiDY = 0)
   leg->SetBorderSize(0);
   leg->SetTextFont(42);
   leg->SetFillStyle(0);
-  TLegendEntry* dleg = leg->AddEntry(data_eff, "Selected QCD", "lpe");
-  TLegendEntry* dmc = leg->AddEntry(mc_eff, "Predicted QCD", "f");
+  TLegendEntry* dleg = leg->AddEntry(data_eff, "Selected QCD multijet", "lpe");
+  TLegendEntry* dmc = leg->AddEntry(mc_eff, "Predicted QCD multijet", "f");
 
   dleg->SetTextFont(42);
   dmc->SetTextFont(42);
