@@ -192,8 +192,8 @@ void draw(TString fname = "qcdClosure_lowDY.root", int lohiDY = 0)
   leg->SetBorderSize(0);
   leg->SetTextFont(42);
   leg->SetFillStyle(0);
-  TLegendEntry* dleg = leg->AddEntry(data_eff, "Selected QCD", "lpe");
-  TLegendEntry* dmc = leg->AddEntry(mc_eff, "Predicted QCD", "f");
+  TLegendEntry* dleg = leg->AddEntry(data_eff, "Selected QCD multijet", "lpe");
+  TLegendEntry* dmc = leg->AddEntry(mc_eff, "Predicted QCD multijet", "f");
 
   dleg->SetTextFont(42);
   dmc->SetTextFont(42);
