@@ -3,7 +3,7 @@ SteerPlotter(){
   // steering for the plotter
   fCycleName     = "mttbar_input_1119/CMSTT_zpn_0911_norebin_scaled.root";
   fInputFiles    = "  DATA,    qcd,  ttbar,      Zprime2000";
-  fSampleNames   = "  Data,    NTMJ, t #bar t,  Z'_2.0_TeV_1%_width ";
+  fSampleNames   = "  Data,    non-top_multijet, t #bar t,  Z'_2.0_TeV_1%_width ";
   fSamplesWeight = "  1.0 ,    1.00,   1.00,          1.00 "; // samples are already scaled
   fSamplesUnc    = "  0.0 ,     0.0,  0.042,           0.0 ";
   fHistColors    = "  1   ,     798,    629,             1 ";
