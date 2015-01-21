@@ -39,12 +39,12 @@ def explimitVS_plot(input_dict_, signal_, oname_):
     leg.SetBorderSize(0)
     for g in graphs: leg.AddEntry(g,g.GetTitle(),'l')
 
-    #text_TL = TPaveText(0.14,0.830,0.44,0.900,'NDC')
-    #text_TL.AddText(label_TL)
-    #text_TL.SetFillColor(0)
-    #text_TL.SetTextAlign(12)
-    #text_TL.SetTextSize(0.06)
-    #text_TL.SetTextFont(42)
+    text_TL = TPaveText(0.14,0.830,0.44,0.900,'NDC')
+    text_TL.AddText(label_TL)
+    text_TL.SetFillColor(0)
+    text_TL.SetTextAlign(12)
+    text_TL.SetTextSize(0.06)
+    text_TL.SetTextFont(42)
 
     text_TR = TPaveText(0.586,0.923,0.999,0.997,'NDC')
     text_TR.AddText(label_TR)
@@ -53,8 +53,8 @@ def explimitVS_plot(input_dict_, signal_, oname_):
     text_TR.SetTextSize(0.055)
     text_TR.SetTextFont(42)
 
-    #sticker = TPaveText(0.14,0.685,0.425,0.830,'NDC')
-    sticker = TPaveText(0.14,0.800,0.425,0.910,'NDC')
+    sticker = TPaveText(0.14,0.685,0.425,0.830,'NDC')
+    #sticker = TPaveText(0.14,0.800,0.425,0.910,'NDC')
     sticker.AddText(signal_dict[signal_][1])
     sticker.SetFillColor(0)
     sticker.SetTextAlign(12)
@@ -68,7 +68,7 @@ def explimitVS_plot(input_dict_, signal_, oname_):
     #c.SetGrid()
     c.SetLogy()
 
-    hr = c.DrawFrame(0.401,0.001,3.099,10)
+    hr = c.DrawFrame(0.401,0.001,3.099,1000)
 
     for g in graphs: g.Draw('l')
 
@@ -84,7 +84,7 @@ def explimitVS_plot(input_dict_, signal_, oname_):
     hr.GetYaxis().SetLabelSize(0.045)
 
     c.Update()
-    #text_TL.Draw('same')
+    text_TL.Draw('same')
     text_TR.Draw('same')
     sticker.Draw('same')
     leg.Draw()
@@ -126,13 +126,13 @@ for s in signal_dict:
 
     input_tuple = (
       ('txt/limits_'+s+'_com_0731.txt', 'combination'       , 1, ROOT.kBlack),
-      #('txt/limits_'+s+'_dil_0731.txt', 'dilepton'          , 1, c_GreenT3),
-      #('txt/limits_'+s+'_ltr.txt'     , 'lepton+jets (threshold)', 2, c_BlueT3),
-      #('txt/limits_'+s+'_lep_0731.txt', 'lepton+jets (boosted)'  , 1, c_BlueT1),
-      #('txt/limits_'+s+'_htt_0731.txt', 'all-hadronic (low-mass)'  , 3, c_DarkOrange),
-      #('txt/limits_'+s+'_ctt_0731.txt', 'all-hadronic (high-mass)'  , 5, c_RedT1)
-      ('txt/limits_'+s+'_B2G13001.txt', 'PRL'        , 2, ROOT.kGray+1),
+      ('txt/limits_'+s+'_dil_0731.txt', 'dilepton'          , 1, c_GreenT3),
+      ('txt/limits_'+s+'_ltr.txt'     , 'lepton+jets (threshold)', 2, c_BlueT3),
+      ('txt/limits_'+s+'_lep_0731.txt', 'lepton+jets (boosted)'  , 1, c_BlueT1),
+      ('txt/limits_'+s+'_htt_0731.txt', 'all-hadronic (low-mass)'  , 3, c_DarkOrange),
+      ('txt/limits_'+s+'_ctt_0731.txt', 'all-hadronic (high-mass)'  , 5, c_RedT1)
+      #('txt/limits_'+s+'_B2G13001.txt', 'PRL'        , 2, ROOT.kGray+1),
     )
 
-#    explimitVS_plot(input_tuple, s, s+'_explimitVS')
-    explimitVS_plot(input_tuple, s, s+'_pub_comparison')
+    explimitVS_plot(input_tuple, s, s+'_explimitVS')
+#    explimitVS_plot(input_tuple, s, s+'_pub_comparison')
