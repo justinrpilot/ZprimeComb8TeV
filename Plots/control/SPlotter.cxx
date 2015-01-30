@@ -1766,6 +1766,8 @@ void SPlotter::GeneralCosmetics(TH1* hist)
   TString title = hist->GetTitle();
   if (title.Contains("GeV")){
     ytitle = TString::Format("Events / %i GeV", (Int_t) w);
+  } else {
+    ytitle = TString::Format("Events / %3.2f units", (Double_t) w);
   }
 
   hist->GetYaxis()->SetTitle(ytitle);  

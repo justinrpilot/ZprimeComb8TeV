@@ -453,7 +453,7 @@ TH1* FileParser::Rebin(TH1* hist, TString dirname)
   if (name.Contains("tau32")){
     TH1* rebinned = (TH1*) hist->Clone();
     rebinned->SetTitle("#tau_{32}");
-    rebinned->GetXaxis()->SetRangeUser(0,0.7);
+    rebinned->GetXaxis()->SetRangeUser(0,0.8);
     return rebinned;
   }
 

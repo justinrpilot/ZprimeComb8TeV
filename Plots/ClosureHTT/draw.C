@@ -70,6 +70,13 @@ void draw(TString fname = "qcdClosure_lowDY.root", int lohiDY = 0)
   TH1F *data_eff = file->Get("totalH");
   TH1F *mc_eff = file->Get("totalPredH");
 
+  // rebin!
+  double binning[] = {200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1900, 2100, 2300, 2500};
+
+  data_eff = (TH1F*) data_eff->Rebin(19, "sel", binning);
+  mc_eff = (TH1F*) mc_eff->Rebin(19, "pred", binning);
+
+
 
   m_rp1_top->Draw();
   m_rp1->Draw();
@@ -98,9 +105,9 @@ void draw(TString fname = "qcdClosure_lowDY.root", int lohiDY = 0)
   TH1F* painter = data_eff->Clone();
 
   data_eff->GetXaxis()->SetTitle("Dijet Invariant Mass [GeV]");
-  data_eff->GetYaxis()->SetTitle("Events");
+  data_eff->GetYaxis()->SetTitle("Events / bin");
   data_eff->SetTitle("");
-  data_eff->GetXaxis()->SetRangeUser(250, 3000);
+  data_eff->GetXaxis()->SetRangeUser(250, 2500);
   data_eff->GetYaxis()->SetRangeUser(0.02, 100000);
   if (lohiDY == 1) data_eff->GetYaxis()->SetRangeUser(0.02, 10000000);
 
@@ -216,7 +223,7 @@ void draw(TString fname = "qcdClosure_lowDY.root", int lohiDY = 0)
   ratio->SetMarkerSize(1.0);
   ratio->Draw("E0");
 
-  TLine* l = new TLine(250, 1, 3000, 1);
+  TLine* l = new TLine(250, 1, 2500, 1);
   l->SetLineStyle(kDashed);
   l->Draw("same");
 
@@ -228,7 +235,7 @@ void draw(TString fname = "qcdClosure_lowDY.root", int lohiDY = 0)
   ratio->SetTitle("");
 
   ratio->GetYaxis()->SetRangeUser(0.3, 1.7);
-  ratio->GetXaxis()->SetRangeUser(250, 3000);
+  ratio->GetXaxis()->SetRangeUser(250, 2500);
   ratio->SetMarkerSize(0.7);
 
   ratio->GetXaxis()->SetLabelSize(0.13);

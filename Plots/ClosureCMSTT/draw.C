@@ -101,7 +101,7 @@ void draw(TString fname = "qcdClosure_lowDY.root", int lohiDY = 0)
   TH1F* painter = data_eff->Clone();
 
   data_eff->GetXaxis()->SetTitle("Dijet Invariant Mass [GeV]");
-  data_eff->GetYaxis()->SetTitle("Events");
+  data_eff->GetYaxis()->SetTitle("Events / bin");
   data_eff->SetTitle("");
   data_eff->GetXaxis()->SetRangeUser(800, 4000);
   if (lohiDY == 1) {
