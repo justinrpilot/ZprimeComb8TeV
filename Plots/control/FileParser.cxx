@@ -387,13 +387,27 @@ TH1* FileParser::Rebin(TH1* hist, TString dirname)
       hist->SetBinContent(i, 0);
       hist->SetBinError(i, 0);
     }
+    
+    Double_t binsx[] = {400, 440, 480, 520, 560, 600, 640, 680, 720, 760, 800, 880, 960, 1080, 1200, 1400};
+    name.Append("_rebin_ly");
+    rebinned = rebinned->Rebin(15, name, binsx);    
+    
     return rebinned;
 
   } else if (name.Contains("MJet") && title.Contains("topjet")) {
     
     TH1* rebinned = hist->Rebin(2);
-    rebinned->GetXaxis()->SetRangeUser(0,300);
     rebinned->SetTitle("M_{jet} [GeV]");
+
+    //for (int i=1; i<hist->GetNbinsX(); ++i){
+    // cout << hist->GetXaxis()->GetBinLowEdge(i) << ", ";
+    //}
+    //cout << endl;
+
+    Double_t binsx[] = {0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 224, 240, 264, 296, 336};
+    name.Append("_rebin_ly");
+    rebinned = rebinned->Rebin(31, name, binsx);    
+    rebinned->GetXaxis()->SetRangeUser(0,336);
     return rebinned;
 
   }

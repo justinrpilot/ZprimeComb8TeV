@@ -1562,6 +1562,7 @@ bool SPlotter::SetMinMax(vector<SHist*> hists)
       }
     }
   }
+  
 
   bool isok = true;
   if (max<1e-6){
@@ -1605,6 +1606,28 @@ bool SPlotter::SetMinMax(vector<SHist*> hists)
       }
       h->GetHist()->SetMaximum(uscale*max);
     }
+
+    if (name == "pT_1_ly_rebin_ly"){
+      if (h->IsStack()){ 
+	h->GetStack()->SetMinimum(0.7);
+	h->GetStack()->SetMaximum(10000);
+      } else {
+	h->GetHist()->SetMinimum(0.7);
+	h->GetHist()->SetMaximum(10000);
+      }
+    }
+
+    if (name == "MJet_1_ly_rebin_ly"){
+      if (h->IsStack()){ 
+	h->GetStack()->SetMinimum(0.2);
+	h->GetStack()->SetMaximum(2500);
+      } else {
+	h->GetHist()->SetMinimum(0.2);
+	h->GetHist()->SetMaximum(2500);
+      }
+    }
+
+
   }  
 
   return isok;
@@ -1768,6 +1791,11 @@ void SPlotter::GeneralCosmetics(TH1* hist)
     ytitle = TString::Format("Events / %i GeV", (Int_t) w);
   } else {
     ytitle = TString::Format("Events / %3.2f units", (Double_t) w);
+  }
+
+  TString name = hist->GetName();
+  if (name == "pT_1_ly_rebin_ly" || name == "MJet_1_ly_rebin_ly"){
+    ytitle = "Events / bin";
   }
 
   hist->GetYaxis()->SetTitle(ytitle);  
