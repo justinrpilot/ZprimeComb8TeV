@@ -104,7 +104,7 @@
     }
 	    
     axisH->GetXaxis()->SetTitle("CA15 jet p_{T} [GeV]");
-    axisH->GetYaxis()->SetTitle("CA15 Top-tagging Misid. Prob.");
+    axisH->GetYaxis()->SetTitle("CA15 t-tagging Misid. Prob.");
     axisH->GetXaxis()->SetTitleSize(0.06);
     axisH->GetYaxis()->SetTitleSize(0.06);
     axisH->GetXaxis()->SetLabelSize(0.06);

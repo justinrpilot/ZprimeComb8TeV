@@ -148,7 +148,7 @@
     axisH->SetMaximum(5.0);
 	    
     axisH->GetXaxis()->SetTitle("CA8 jet p_{T} [GeV]");
-    axisH->GetYaxis()->SetTitle("CA8 Top-tagging Misid. Prob.");
+    axisH->GetYaxis()->SetTitle("CA8 t-tagging Misid. Prob.");
     axisH->GetXaxis()->SetTitleSize(0.06);
     axisH->GetYaxis()->SetTitleSize(0.06);
     axisH->GetXaxis()->SetLabelSize(0.06);
