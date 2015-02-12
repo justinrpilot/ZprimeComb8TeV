@@ -6,9 +6,13 @@ wide1500->SetLineColor(kBlue);
 narrow1500->SetLineColor(kRed);
 rsgluon1500->SetLineColor(kBlack);
 
-wide1500->SetLineWidth(2);
-narrow1500->SetLineWidth(2);
-rsgluon1500->SetLineWidth(2);
+wide1500->SetLineStyle(kDashed);
+narrow1500->SetLineStyle(kSolid);
+rsgluon1500->SetLineStyle(kDotted);
+
+wide1500->SetLineWidth(4);
+narrow1500->SetLineWidth(4);
+rsgluon1500->SetLineWidth(4);
 
 
 wide1500->Rebin(5);
@@ -22,6 +26,16 @@ narrow1500->GetXaxis()->SetTitleSize(0.06);
 narrow1500->GetXaxis()->SetLabelSize(0.06);
 narrow1500->GetYaxis()->SetTitleSize(0.06);
 narrow1500->GetYaxis()->SetLabelSize(0.06);
+narrow1500->GetYaxis()->SetTitleFont(42);
+narrow1500->GetXaxis()->SetTitleFont(42);
+narrow1500->GetYaxis()->SetLabelFont(42);
+narrow1500->GetXaxis()->SetLabelFont(42);
+
+narrow1500->GetYaxis()->SetNdivisions(505);
+narrow1500->GetXaxis()->SetNdivisions(505);
+
+narrow1500->SetTitle("");
+
 narrow1500->DrawNormalized();
 wide1500->DrawNormalized("same");
 rsgluon1500->DrawNormalized("same");
@@ -45,6 +59,7 @@ c1->Update();
 
 CMS_lumi(c1, 12, 10, "Simulation");
 
+c1->SaveAs("Mttbargen1500.pdf");
 
 }
 

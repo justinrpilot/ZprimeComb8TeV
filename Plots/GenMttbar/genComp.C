@@ -6,9 +6,13 @@ wide3000->SetLineColor(kBlue);
 narrow3000->SetLineColor(kRed);
 rsgluon3000->SetLineColor(kBlack);
 
-wide3000->SetLineWidth(2);
-narrow3000->SetLineWidth(2);
-rsgluon3000->SetLineWidth(2);
+wide3000->SetLineStyle(kDashed);
+narrow3000->SetLineStyle(kSolid);
+rsgluon3000->SetLineStyle(kDotted);
+
+wide3000->SetLineWidth(4);
+narrow3000->SetLineWidth(4);
+rsgluon3000->SetLineWidth(4);
 
 
 wide3000->Rebin(5);
@@ -22,6 +26,15 @@ narrow3000->GetXaxis()->SetTitleSize(0.06);
 narrow3000->GetXaxis()->SetLabelSize(0.06);
 narrow3000->GetYaxis()->SetTitleSize(0.06);
 narrow3000->GetYaxis()->SetLabelSize(0.06);
+narrow3000->GetYaxis()->SetTitleFont(42);
+narrow3000->GetXaxis()->SetTitleFont(42);
+narrow3000->GetYaxis()->SetLabelFont(42);
+narrow3000->GetXaxis()->SetLabelFont(42);
+
+narrow3000->GetYaxis()->SetNdivisions(505);
+narrow3000->GetXaxis()->SetNdivisions(505);
+
+narrow3000->SetTitle("");
 narrow3000->DrawNormalized();
 wide3000->DrawNormalized("same");
 rsgluon3000->DrawNormalized("same");
@@ -46,6 +59,7 @@ c1->Update();
 
 CMS_lumi(c1, 12, 10, "Simulation");
 
+c1->SaveAs("Mttbargen3000.pdf");
 
 }
 
