@@ -6,7 +6,7 @@ label_TL = '#font[62]{CMS}'
 label_TR = '19.7 fb^{-1} (8 TeV)'
 
 signal_dict = {
-  'n': ['Z\'', '#splitline{95% CL expected}{Z\' 1.2% width}'],
+  'n': ['Z\'', '#splitline{95% CL expected}{Z\' 1% width}'],
   'w': ['Z\'', '#splitline{95% CL expected}{Z\' 10% width}'],
   'r': ['g_{KK}', '#splitline{95% CL expected}{KK gluon}']
 }
