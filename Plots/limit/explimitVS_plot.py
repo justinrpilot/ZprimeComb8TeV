@@ -24,7 +24,7 @@ def get_expectedlimit_graph(input_file_, title_, linestyle_, linecolor_):
     g.SetTitle(title_)
     g.SetLineStyle(linestyle_)
     g.SetLineColor(linecolor_)
-    g.SetLineWidth(4)
+    g.SetLineWidth(5)
 
     return g
 
