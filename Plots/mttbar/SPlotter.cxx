@@ -536,7 +536,7 @@ void SPlotter::ProcessAndPlot(std::vector<TObjArray*> histarr)
   for (int i=0; i<histarr[0]->GetEntries(); ++i){
 
     // get the histograms for the different processes
-    vector<SHist*> hists = GetPlottableHists(histarr, i);
+    vector<SHist*> hists = GetPlottableHists(histarr, i);    
 
     // no plottable hists found at position i
     if (debug) cout << "Number of plottable hists at index " << i << " = " << hists.size() << endl;
@@ -613,7 +613,6 @@ void SPlotter::ProcessAndPlot(std::vector<TObjArray*> histarr)
 	if (bZScoreInRatio) PlotZScore(hists, ipad);
 	else PlotRatios(hists, ipad);
       }
-    
     }
 
     ++iplot;
@@ -1526,9 +1525,10 @@ void SPlotter::DrawLegend(vector<SHist*> hists)
   if (bSingleEPS) leg->SetTextSize(0.05);
 
   // do the ordering by hand
+  cout << "warning: plotting legend - check if ordering is ok (by hand, line 1530 in SPlotter!" << endl;
   //Int_t j[] = {0, 4, 1, 2, 3, 5, 6}; // dilepton
-  Int_t j[] = {0, 2, 1, 3, 4}; // CMSTT
-  //Int_t j[] = {0, 7, 1, 2, 3, 4, 5, 6, 8, 9}; // l+jets case
+  //Int_t j[] = {0, 2, 1, 3, 4}; // CMSTT
+  Int_t j[] = {0, 7, 1, 2, 3, 4, 5, 6, 8, 9}; // l+jets case
 
   for (Int_t i=0; i<narr; ++i){
 
@@ -1587,33 +1587,31 @@ void SPlotter::DrawLegend(vector<SHist*> hists)
   // auxiliary text
   TString name = hists[0]->GetName();
   TString infotext;
-  if (name.Contains("el_0top0btag")) infotext = "e+jets; 0 top-tag, 0 b-tag";
-  if (name.Contains("el_0top1btag")) infotext = "e+jets; 0 top-tag, 1 b-tag";
-  if (name.Contains("el_1top")) infotext = "e+jets; 1 top-tag";
+  if (name.Contains("el_0top0btag")) infotext = "e+jets; 0 t tag, 0 b tag";
+  if (name.Contains("el_0top1btag")) infotext = "e+jets; 0 t tag, 1 b tag";
+  if (name.Contains("el_1top")) infotext = "e+jets; 1 t tag";
 
-  if (name.Contains("mu_0top0btag")) infotext = "#mu+jets, 0 top-tag, 0 b-tag";
-  if (name.Contains("mu_0top1btag")) infotext = "#mu+jets, 0 top-tag, 1 b-tag";
-  if (name.Contains("mu_1top")) infotext = "#mu+jets, 1 top-tag";
+  if (name.Contains("mu_0top0btag")) infotext = "#mu+jets, 0 t tag, 0 b tag";
+  if (name.Contains("mu_0top1btag")) infotext = "#mu+jets, 0 t tag, 1 b tag";
+  if (name.Contains("mu_1top")) infotext = "#mu+jets, 1 t tag";
 
   if (name.Contains("ee")) infotext = "ee";
   if (name.Contains("mumu")) infotext = "#mu#mu";
   if (name.Contains("emu")) infotext = "e#mu";
 
-  if (name == "btag0") infotext = "|#Deltay| < 1.0; 0 b-tag (high-mass)";
-  if (name == "btag1") infotext = "|#Deltay| < 1.0; 1 b-tag (high-mass)";
-  if (name == "btag2") infotext = "|#Deltay| < 1.0; 2 b-tag (high-mass)";
-  if (name == "btag3") infotext = "|#Deltay| > 1.0; 0 b-tag (high-mass)";
-  if (name == "btag4") infotext = "|#Deltay| > 1.0; 1 b-tag (high-mass)";
-  if (name == "btag5") infotext = "|#Deltay| > 1.0; 2 b-tag (high-mass)";
+  if (name == "btag0") infotext = "|#Deltay| < 1.0; 0 b tag (high mass)";
+  if (name == "btag1") infotext = "|#Deltay| < 1.0; 1 b tag (high mass)";
+  if (name == "btag2") infotext = "|#Deltay| < 1.0; 2 b tag (high mass)";
+  if (name == "btag3") infotext = "|#Deltay| > 1.0; 0 b tag (high mass)";
+  if (name == "btag4") infotext = "|#Deltay| > 1.0; 1 b tag (high mass)";
+  if (name == "btag5") infotext = "|#Deltay| > 1.0; 2 b tag (high mass)";
 
-  if (name == "httbtag0") infotext = "H_{T} > 800 GeV; 0 b-tag (low-mass)";
-  if (name == "httbtag1") infotext = "H_{T} > 800 GeV; 1 b-tag (low-mass)";
-  if (name == "httbtag2") infotext = "H_{T} > 800 GeV; 2 b-tag (low-mass)";
-  if (name == "mjhttbtag0") infotext = "H_{T} < 800 GeV; 0 b-tag (low-mass)";
-  if (name == "mjhttbtag1") infotext = "H_{T} < 800 GeV; 1 b-tag (low-mass)";
-  if (name == "mjhttbtag2") infotext = "H_{T} < 800 GeV; 2 b-tag (low-mass)";
-
-  cout << name << endl;
+  if (name == "httbtag0") infotext = "H_{T} > 800 GeV; 0 b tag (low mass)";
+  if (name == "httbtag1") infotext = "H_{T} > 800 GeV; 1 b tag (low mass)";
+  if (name == "httbtag2") infotext = "H_{T} > 800 GeV; 2 b tag (low mass)";
+  if (name == "mjhttbtag0") infotext = "H_{T} < 800 GeV; 0 b tag (low mass)";
+  if (name == "mjhttbtag1") infotext = "H_{T} < 800 GeV; 1 b tag (low mass)";
+  if (name == "mjhttbtag2") infotext = "H_{T} < 800 GeV; 2 b tag (low mass)";
 
   TLatex *text1 = new TLatex(3.5, 24, infotext);
   text1->SetNDC();
