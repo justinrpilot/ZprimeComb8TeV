@@ -82,8 +82,8 @@ void draw(TString fname = "2dcut_dRjet_muon.root")
     
   TH1F* painter = data_eff->GetHistogram();
 
-  painter->GetXaxis()->SetTitle("#Delta R (l,jet)");
-  painter->GetYaxis()->SetTitle("efficiency");
+  painter->GetXaxis()->SetTitle("#DeltaR(l,jet)");
+  painter->GetYaxis()->SetTitle("Efficiency");
   painter->SetTitle("");
   painter->GetXaxis()->SetRangeUser(0, 0.5);
   painter->GetYaxis()->SetRangeUser(0.0001, 1.0);
@@ -142,7 +142,16 @@ void draw(TString fname = "2dcut_dRjet_muon.root")
   leg->SetTextFont(42);
   leg->SetFillStyle(0);
   TLegendEntry* dleg = leg->AddEntry(data_eff, "Data", "lpe");
-  TLegendEntry* dmc = leg->AddEntry(mc_eff, "Simulation", "lpe");
+  //TLegendEntry* dmc = leg->AddEntry(mc_eff, "Simulation", "lpe");
+  TLegendEntry* dmc = leg->AddEntry(mc_eff, "Simulation", "");
+
+  TGraphErrors* gleg = new TGraphErrors(1);
+  gleg->SetPoint(0, 0.049, 0.58);
+  gleg->SetPointError(0, 0.015, 0.025);
+  gleg->SetMarkerStyle(25);
+  gleg->SetMarkerColor(kRed+1);
+  gleg->SetLineColor(kRed+1);
+  gleg->Draw("Z0P");
 
   dleg->SetTextFont(42);
   dmc->SetTextFont(42);
@@ -168,8 +177,8 @@ void draw(TString fname = "2dcut_dRjet_muon.root")
 
   rpainter->GetXaxis()->SetRangeUser(0, 0.5);
 
-  rpainter->GetXaxis()->SetTitle("#Delta R (l,jet)");
-  rpainter->GetYaxis()->SetTitle("data/MC");
+  rpainter->GetXaxis()->SetTitle("#DeltaR(l,jet)");
+  rpainter->GetYaxis()->SetTitle("Data/MC");
   rpainter->SetTitle("");
 
   rpainter->GetYaxis()->SetRangeUser(0.3, 1.7);
