@@ -449,6 +449,7 @@ TH1* FileParser::Rebin(TH1* hist, TString dirname)
   if (name == "M_ttbar_rec" || name == "M_ttbar_rec_ly") {
     TH1* rebinned = hist->Rebin(2);
     rebinned->GetXaxis()->SetRangeUser(0,3500);
+    rebinned->GetXaxis()->SetLimits(0,3500);
     rebinned->SetTitle("M_{t#bart} [GeV]");
     return rebinned;
   }
@@ -479,6 +480,10 @@ TH1* FileParser::Rebin(TH1* hist, TString dirname)
   } else if (name.BeginsWith("mu_0top0btag_mttbar")) {
     
     TH1* rebinned = hist->Rebin(2);
+    if (name=="mu_0top0btag_mttbar__wlight"){
+      rebinned->SetBinContent(35,0.1589);
+      rebinned->SetBinError(35,0.3867);
+    }
     rebinned->GetXaxis()->SetRangeUser(0,3500);
     rebinned->SetTitle("M_{t#bart} [GeV]");
     return rebinned;
@@ -486,6 +491,15 @@ TH1* FileParser::Rebin(TH1* hist, TString dirname)
   } else if (name.BeginsWith("mu_0top1btag_mttbar")) {
     
     TH1* rebinned = hist->Rebin(2);
+
+    rebinned->SetBinContent(32,0);
+    rebinned->SetBinContent(33,0);
+    rebinned->SetBinContent(34,0);
+    rebinned->SetBinContent(35,0);
+    rebinned->SetBinContent(37,0);
+    rebinned->SetBinContent(40,0);
+    rebinned->SetBinContent(43,0);
+
     rebinned->GetXaxis()->SetRangeUser(0,3500);
     rebinned->SetTitle("M_{t#bart} [GeV]");
     return rebinned;
@@ -499,13 +513,27 @@ TH1* FileParser::Rebin(TH1* hist, TString dirname)
     //name.Append("_rebin_lx");
     //TH1* rebinned = hist->Rebin(30, name, binsx);
     TH1* rebinned = hist->Rebin(2);
+
+    rebinned->SetBinContent(29,0);
+    rebinned->SetBinContent(30,0);
+    rebinned->SetBinContent(31,0);
+    rebinned->SetBinContent(32,0);
+    rebinned->SetBinContent(33,0);
+   
     rebinned->GetXaxis()->SetRangeUser(0,3500);
     rebinned->SetTitle("M_{t#bart} [GeV]");
     return rebinned;
 
   } else if (name.BeginsWith("el_0top0btag_mttbar")) {
-    
+    cout << "name = " << name << endl;
     TH1* rebinned = hist->Rebin(2);
+    if (name=="el_0top0btag_mttbar__wlight")
+    {
+      rebinned->SetBinContent(32, 0.31089);
+      rebinned->SetBinError(32, 0.642);
+      rebinned->SetBinContent(33, 0.3073);
+      rebinned->SetBinError(33, 0.9042);
+    }
     rebinned->GetXaxis()->SetRangeUser(0,3500);
     rebinned->SetTitle("M_{t#bart} [GeV]");
     return rebinned;
@@ -513,6 +541,13 @@ TH1* FileParser::Rebin(TH1* hist, TString dirname)
   } else if (name.BeginsWith("el_0top1btag_mttbar")) {
     
     TH1* rebinned = hist->Rebin(2);
+    if (name=="el_0top1btag_mttbar__wlight")
+    {
+      rebinned->SetBinContent(33, 0.1038);
+      rebinned->SetBinError(33, 0.338);
+      rebinned->SetBinContent(35, 0.095);
+      rebinned->SetBinError(35, 0.2975);
+    }
     rebinned->GetXaxis()->SetRangeUser(0,3500);
     rebinned->SetTitle("M_{t#bart} [GeV]");
     return rebinned;
@@ -526,6 +561,12 @@ TH1* FileParser::Rebin(TH1* hist, TString dirname)
     //name.Append("_rebin_lx");
     //TH1* rebinned = hist->Rebin(30, name, binsx);   
     TH1* rebinned = hist->Rebin(2);
+
+    rebinned->SetBinContent(30, 0);
+    rebinned->SetBinContent(31, 0);
+    rebinned->SetBinContent(32, 0);
+    rebinned->SetBinContent(34, 0);
+
     rebinned->GetXaxis()->SetRangeUser(0,3500);
     rebinned->SetTitle("M_{t#bart} [GeV]");
     return rebinned;
@@ -546,10 +587,10 @@ TH1* FileParser::Rebin(TH1* hist, TString dirname)
 
   } else if (name.BeginsWith("lepton_1top_mttbar")) {
     
-    Double_t binsx[] = {0, 200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000, 3200, 3400, 3500, 3600, 3700, 3800, 3900, 4000, 5000};
-    name.Append("_rebin_lx");
-    TH1* rebinned = hist->Rebin(24, name, binsx);
-    //TH1* rebinned = hist->Rebin(4);
+    //Double_t binsx[] = {0, 200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000, 3200, 3400, 3500, 3600, 3700, 3800, 3900, 4000, 5000};
+    //name.Append("_rebin_lx");
+    //TH1* rebinned = hist->Rebin(24, name, binsx);
+    TH1* rebinned = hist->Rebin(2);
     rebinned->GetXaxis()->SetRangeUser(0,3500);
     rebinned->SetTitle("M_{t#bart} [GeV]");
     return rebinned;
@@ -563,13 +604,39 @@ TH1* FileParser::Rebin(TH1* hist, TString dirname)
     //TH1* rebinned = hist->Rebin(1);
     TH1* rebinned = new TH1D(name, hist->GetTitle(), 50, 0, 5000);
     for (int i=1; i<51; ++i){
-      if (i<20 && hist->GetBinContent(i)<0.4) continue;
+      if ((i<20 && hist->GetBinContent(i)<0.4) || ((i>25 && hist->GetBinContent(i)<0.15))) continue;
       rebinned->SetBinContent(i, hist->GetBinContent(i));
       rebinned->SetBinError(i, hist->GetBinError(i));
     }
+
+    // do some filling up of empty bins to display errors correctly (at all)
+    if (name.BeginsWith("btag1__")){
+      rebinned->SetBinContent(8, 0);
+      rebinned->SetBinError(8, 0);
+    }
+    cout << "name = " << name << endl;
+    if (name == "btag2__ttbar_rebin_lx"){
+      rebinned->SetBinContent(20, 0.30363);
+    }
+    if (name == "btag1__qcd_rebin_lx"){
+      rebinned->SetBinContent(26, 0.31576);
+      rebinned->SetBinError(26, 0.4583);
+    }
+    if (name == "btag4__qcd_rebin_lx"){
+      rebinned->SetBinContent(34, 0.3128);
+      rebinned->SetBinError(34, 0.4379);
+    }
+    if (name == "btag5__qcd_rebin_lx"){
+      rebinned->SetBinContent(36, 0);
+      rebinned->SetBinError(36, 0);
+      rebinned->SetBinContent(26, 0.3113);
+      rebinned->SetBinError(26, 0.3620);
+      rebinned->SetBinContent(27, 0.381);
+      rebinned->SetBinError(27, 0.3823);
+    }
+
     rebinned->GetXaxis()->SetRangeUser(0,3500);
     rebinned->SetTitle("M_{t#bart} [GeV]");
-    cout << "name = " << name << endl;
     return rebinned;
 
   } else if (name.Contains("htt")) {
@@ -578,6 +645,33 @@ TH1* FileParser::Rebin(TH1* hist, TString dirname)
     name.Append("_rebin_lx");
     //TH1* rebinned = hist->Rebin(19, name, binsx);   
     TH1* rebinned = hist->Rebin(2);
+    for (int i=1; i<rebinned->GetNbinsX()+1; ++i){
+      if ((i<10 && hist->GetBinContent(i)<0.1) || ((i>25 && hist->GetBinContent(i)<0.07))){
+        rebinned->SetBinContent(i, 0);
+        rebinned->SetBinError(i, 0);
+      }
+    }
+
+    // some corrections by hand
+    if (name.Contains("httbtag2")){
+      rebinned->SetBinContent(27, 0.);
+      rebinned->SetBinError(27, 0.);
+      rebinned->SetBinContent(31, 0.);
+      rebinned->SetBinError(31, 0.);
+    }
+    if (name=="mjhttbtag0__qcd_rebin_lx"){
+      rebinned->SetBinContent(33, 0.126);
+      rebinned->SetBinError(33, 0.2591);
+    }
+    if (name.Contains("mjhttbtag1")){
+      rebinned->SetBinContent(31, 0.);
+      rebinned->SetBinError(31, 0.);
+    }
+    if (name.Contains("mjhttbtag2")){
+      rebinned->SetBinContent(29, 0.);
+      rebinned->SetBinError(29, 0.);
+    }
+
     rebinned->GetXaxis()->SetRangeUser(0,3500);
     rebinned->SetTitle("M_{t#bart} [GeV]");
     return rebinned;
@@ -588,8 +682,20 @@ TH1* FileParser::Rebin(TH1* hist, TString dirname)
 		    1100,1200,1300,
 		    1400,1500,1600,1700,1800,1900,2000,2100,2200,2300,2400,2500,2600, 2700, 2800, 2900, 3000,3500}; 
     name.Append("_rebin_lx");
-    TH1* rebinned = hist->Rebin(30, name, binsx);   
+    TH1* rebinned = hist->Rebin(30, name, binsx);  
     //TH1* rebinned = hist->Rebin(3);
+
+    if (name.Contains("ee")){
+      rebinned->SetBinContent(30, 0);
+      rebinned->SetBinError(30, 0);
+    }
+    if (name.Contains("mumu")){
+      rebinned->SetBinContent(3, 0);
+      rebinned->SetBinError(3, 0);
+      rebinned->SetBinContent(29, 0);
+      rebinned->SetBinError(29, 0);
+    }
+
     rebinned->GetXaxis()->SetRangeUser(0,3000);
     rebinned->SetTitle("M_{t#bart} [GeV]");
     return rebinned;

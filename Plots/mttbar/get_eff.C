@@ -1,10 +1,12 @@
-void get_eff(TString inname = "ljets_notrebinned_scaled.root")
+void get_eff(TString inname = "ljets_all_0911_norebin_scaled.root")
 {
   //inname = "HEPTT_rsg_scaled.root";
-  inname = "CMSTT_rsg_scaled.root";
+  //inname = "CMSTT_rsg_scaled.root";
   //inname = "templates_ZpN.root";
   //inname = "dilep_10pctZprime_50GeVbin_scaled.root";
   //inname = "dilep_GKK_50GeVbin_scaled.root";
+
+  inname.Prepend("mttbar_input_1119/");
 
   // small macro to calculate the signal efficiency
 
@@ -14,7 +16,9 @@ void get_eff(TString inname = "ljets_notrebinned_scaled.root")
   // numbers for l+jets analysis  
   const Int_t Np = 9;
   TString sname[Np]   = { "Zprime1000",   "Zprime2000",   "Zprime3000",   "ZprimeWide1000",   "ZprimeWide2000", "ZprimeWide3000", "RSgluon1000", "RSgluon2000", "RSgluon3000"};
-  //Double_t  sev[Np] = {         206846,        189522 ,          96371,             207430,             485137,           200810,       100000 ,       100000 ,       100000 };
+
+  // numbers for l+jets analysis
+  Double_t  sev[Np] = {         206846,        189522 ,          96371,             207430,             485137,           200810,       100000 ,       100000 ,       100000 };
 
   // numbers for dilepton analysis
   //Double_t  sev[Np] = {         103000,        95000,          96000,             104000,             97000,           101000,       100000 ,       100000 ,       100000 };
@@ -24,7 +28,7 @@ void get_eff(TString inname = "ljets_notrebinned_scaled.root")
   //Double_t  sev[Np] = {         217629,        206846,        189522 ,             216010,            207430,           485137,        92960,        100000,       100000 };
 
   // for CMSTT analysis
-  Double_t  sev[Np] = {         101697,        90778,           91209,               102618,              93869,           97234,       100000 ,       100000 ,       100000 };
+  //Double_t  sev[Np] = {         101697,        90778,           91209,               102618,              93869,           97234,       100000 ,       100000 ,       100000 };
 
   // loop over all entries in the file
   TKey *key;

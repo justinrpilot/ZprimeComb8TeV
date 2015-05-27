@@ -100,7 +100,7 @@ void draw(TString fname = "qcdClosure_lowDY.root", int lohiDY = 0)
  
   TH1F* painter = data_eff->Clone();
 
-  data_eff->GetXaxis()->SetTitle("Dijet Invariant Mass [GeV]");
+  data_eff->GetXaxis()->SetTitle("Dijet invariant mass [GeV]");
   data_eff->GetYaxis()->SetTitle("Events / bin");
   data_eff->SetTitle("");
   data_eff->GetXaxis()->SetRangeUser(800, 4000);
@@ -230,7 +230,7 @@ void draw(TString fname = "qcdClosure_lowDY.root", int lohiDY = 0)
 
   ratio->GetXaxis()->SetRangeUser(0, 0.5);
 
-  ratio->GetXaxis()->SetTitle("Dijet Invariant Mass [GeV]");
+  ratio->GetXaxis()->SetTitle("Dijet invariant mass [GeV]");
   ratio->GetYaxis()->SetTitle("Sel./Pred.");
   ratio->SetTitle("");
 

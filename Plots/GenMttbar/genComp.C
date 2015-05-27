@@ -20,7 +20,7 @@ narrow3000->Rebin(5);
 rsgluon3000->Rebin(5);
 
 narrow3000->GetXaxis()->SetTitle("Generated M_{t#bar{t}} [GeV]");
-narrow3000->GetYaxis()->SetTitle("Fraction of Events / Bin");
+narrow3000->GetYaxis()->SetTitle("Fraction of events / bin");
 narrow3000->GetXaxis()->SetRangeUser(0., 4000.);
 narrow3000->GetXaxis()->SetTitleSize(0.06);
 narrow3000->GetXaxis()->SetLabelSize(0.06);

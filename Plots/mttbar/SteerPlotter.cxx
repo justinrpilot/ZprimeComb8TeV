@@ -133,16 +133,35 @@ void SteerPlotter::Print(Option_t* opt) const
   } else {
     cout << "No normalisation error will be drawn." << endl;
   }
-  cout << (bDrawLegend? "Legend will be plotted everywhere." : "Legend will be plotted on first plot only") << endl;
-  cout << (bShapeNorm? "Shape normalization" : "No shape normalization") << endl;
-  cout << (bDoCumulative? "Cumulative distributions will be plotted." : "Normal distributions will be plotted") << endl;
-  cout << (bSingleEPS? "Creating one eps file per histogram." : "Creating one ps file with all histograms for each histogram collection.") << endl;
-  cout << (bIgnoreEmptyBins? "Empty bins will not be plotted in the ratio." : "Empty bins will have infinite error in the ratio.") << endl;
-  cout << (bLumiNorm? "Luminosity normalization" : "No lumi normalization") << endl;
-  cout << (bPortrait?  "Setting the page to portrait mode" : "Setting the page to landscape mode") << endl;
-  cout << (bPlotThetaFile? "Creating plots from one input theta file." : "Using standard SFrame output for plots.") << endl;
-  cout << "--------------------------------------------------------------------------------------------------------------------" << endl;
+
+  if (bDrawLegend) cout << "Legend will be plotted everywhere." << endl;
+  else cout << "Legend will be plotted on first plot only" << endl;
+
+  if (bShapeNorm) cout << "Shape normalization" << endl;
+  else cout << "No shape normalization" << endl;
+
+  if (bDoCumulative)  cout << "Cumulative distributions will be plotted." << endl;
+  else cout << "Normal distributions will be plotted" << endl;
+
+  if (bSingleEPS) cout << "Creating one eps file per histogram." << endl;
+  else cout << "Creating one ps file with all histograms for each histogram collection." << endl;
+
+  if (bIgnoreEmptyBins) cout << "Empty bins will not be plotted in the ratio." << endl;
+  else cout << "Empty bins will have infinite error in the ratio." << endl;
   
+  if (bLumiNorm) cout << "Luminosity normalization" << endl; 
+  else cout << "No lumi normalization" << endl;
+  
+  if (bLumiNorm) cout << "Luminosity normalization" << endl;
+  else cout << "No lumi normalization" << endl;
+
+  if (bPortrait) cout << "Setting the page to portrait mode" << endl;
+  else cout << "Setting the page to landscape mode" << endl;
+
+  if (bPlotThetaFile) cout << "Creating plots from one input theta file." << endl;
+  else cout << "Using standard SFrame output for plots." << endl;
+  cout << "--------------------------------------------------------------------------------------------------------------------" << endl;
+
 }
 
 void SteerPlotter::SetShapeNorm(Bool_t flag){bShapeNorm = flag;}

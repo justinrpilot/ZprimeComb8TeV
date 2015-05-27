@@ -46,6 +46,13 @@ def explimitVS_plot(input_dict_, signal_, oname_):
     text_TL.SetTextSize(0.06)
     text_TL.SetTextFont(42)
 
+    text_TL2 = TPaveText(0.14,0.720,0.44,0.830,'NDC')
+    text_TL2.AddText("Preliminary")
+    text_TL2.SetFillColor(0)
+    text_TL2.SetTextAlign(12)
+    text_TL2.SetTextSize(0.06)
+    text_TL2.SetTextFont(52)
+
     text_TR = TPaveText(0.586,0.923,0.999,0.997,'NDC')
     text_TR.AddText(label_TR)
     text_TR.SetFillColor(0)
@@ -85,6 +92,7 @@ def explimitVS_plot(input_dict_, signal_, oname_):
 
     c.Update()
     text_TL.Draw('same')
+    #text_TL2.Draw('same')
     text_TR.Draw('same')
     sticker.Draw('same')
     leg.Draw()
@@ -125,12 +133,12 @@ c_GreenT5       = TColor.GetColor( "#C2EBA7" );
 for s in signal_dict:
 
     input_tuple = (
-      ('txt/limits_'+s+'_com_0828.txt', 'combination'       , 1, ROOT.kBlack),
-      ('txt/limits_'+s+'_dil_0828.txt', 'dilepton'          , 1, c_GreenT3),
-      ('txt/limits_'+s+'_ltr.txt'     , 'lepton+jets (threshold)', 2, c_BlueT3),
-      ('txt/limits_'+s+'_lep_0828.txt', 'lepton+jets (boosted)'  , 1, c_BlueT1),
-      ('txt/limits_'+s+'_htt_0828.txt', 'all-hadronic (low-mass)'  , 3, c_DarkOrange),
-      ('txt/limits_'+s+'_ctt_0828.txt', 'all-hadronic (high-mass)'  , 5, c_RedT1)
+      ('txt/limits_'+s+'_com_0828.txt', 'Combination'       , 1, ROOT.kBlack),
+      ('txt/limits_'+s+'_dil_0828.txt', 'Dilepton'          , 1, c_GreenT3),
+      ('txt/limits_'+s+'_ltr.txt'     , 'Lepton+jets (threshold)', 2, c_BlueT3),
+      ('txt/limits_'+s+'_lep_0828.txt', 'Lepton+jets (boosted)'  , 1, c_BlueT1),
+      ('txt/limits_'+s+'_htt_0828.txt', 'All-hadronic (low-mass)'  , 3, c_DarkOrange),
+      ('txt/limits_'+s+'_ctt_0828.txt', 'All-hadronic (high-mass)'  , 5, c_RedT1)
       #('txt/limits_'+s+'_B2G13001.txt', 'PRL'        , 2, ROOT.kGray+1),
     )
 

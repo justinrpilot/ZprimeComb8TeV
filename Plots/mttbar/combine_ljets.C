@@ -90,6 +90,10 @@ void CombineChannels(TH1* hist, TString cat, TString process, TString sys, TStri
     }
   }
 
+  //if (!(elname.Contains("Zprime") || elname.Contains("RSgluon"))){
+  //  cout << "adding " << elname << endl
+  //	 << " to    " << muname << endl << endl;
+  //}
   hist->Add(hel);
   muname.ReplaceAll("mu_", "lepton_");
   hist->SetName(muname);

@@ -118,6 +118,7 @@ def limit_canvas(limits_, signal_, oname_):
 
     hr.GetXaxis().SetTitle('M_{'+signal_dict[signal_][0]+'} [TeV]')
     hr.GetYaxis().SetTitle('Upper limit on #sigma_{'+signal_dict[signal_][0]+'} #times B('+signal_dict[signal_][0]+' #rightarrow t#bar{t}) [pb]')
+    #hr.GetYaxis().SetTitle('\\mathrm{Upper~limit~on~}\\sigma_{'+signal_dict[signal_][0]+'}\\times\\mathscr{B}('+signal_dict[signal_][0]+' \\rightarrow t\\bar{t}) [pb]')
     hr.GetXaxis().SetTitleSize(0.055)
     hr.GetYaxis().SetTitleSize(0.055)
     hr.GetXaxis().SetTitleFont(42)
