@@ -62,8 +62,8 @@ void draw(TString fname = "qcdClosure_lowDY.root", int lohiDY = 0)
   TPad* m_rp1_top = new TPad("pad1", "Control Plots 2", x1, y2, x2, y3);
   TPad* m_rp1 = new TPad("rp1", "Ratio2", x1, y1, x2, y2);
        
-  m_rp1_top->SetTopMargin(0.1); m_rp1_top->SetBottomMargin(0.0); m_rp1_top->SetLeftMargin(0.19); m_rp1_top->SetRightMargin(0.05);
-  m_rp1->SetTopMargin(0.0); m_rp1->SetBottomMargin(0.35); m_rp1->SetLeftMargin(0.19); m_rp1->SetRightMargin(0.05);
+  m_rp1_top->SetTopMargin(0.1); m_rp1_top->SetBottomMargin(0.01); m_rp1_top->SetLeftMargin(0.19); m_rp1_top->SetRightMargin(0.05);
+  m_rp1->SetTopMargin(0.01); m_rp1->SetBottomMargin(0.35); m_rp1->SetLeftMargin(0.19); m_rp1->SetRightMargin(0.05);
 
   //TGraphAsymmErrors* data_eff = (TGraphAsymmErrors*) file->Get("qcd3H");
   //TGraphAsymmErrors* mc_eff = (TGraphAsymmErrors*) file->Get("qcd3predH");
@@ -189,10 +189,17 @@ void draw(TString fname = "qcdClosure_lowDY.root", int lohiDY = 0)
   TString lheader = "";
   if (lohiDY == 0) lheader = "0+1+2 b-tags, H_{T} > 800 GeV";
   else lheader = "0+1+2 b-tags, H_{T} < 800 GeV";
-  TLegend *leg = new TLegend(0.45,0.63,0.73,0.83, lheader,"brNDC");
-  TLegendEntry *header = (TLegendEntry*)leg->GetListOfPrimitives()->First();
-  header->SetTextFont(42);
-  header->SetTextSize(0.06);
+
+  TLegend *leg = new TLegend(0.45,0.63,0.73,0.78, "","brNDC");
+  
+  TLatex *text3 = new TLatex(3.5, 24, lheader);
+  text3->SetNDC();
+  text3->SetTextAlign(13);
+  text3->SetX(0.46);
+  text3->SetTextFont(42);
+  text3->SetTextSize(0.06);
+  text3->SetY(0.85);
+  text3->Draw();  
 
   leg->SetFillColor(0);
   leg->SetLineColor(1);
