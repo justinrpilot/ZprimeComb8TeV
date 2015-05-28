@@ -7,8 +7,8 @@ label_TL = '#font[62]{CMS}'
 label_TR = '19.7 fb^{-1} (8 TeV)'
 
 signal_dict = {
-  'n': ['Z\'', 'Z\' 1.2% width'],
-  'w': ['Z\'', 'Z\' 10% width'],
+  'n': ['Z\'', 'Topcolor Z\' 1.2% width'],
+  'w': ['Z\'', 'Topcolor Z\' 10% width'],
   'r': ['g_{KK}', 'KK gluon']
 }
 
@@ -71,6 +71,8 @@ def limit_canvas(limits_, signal_, oname_):
 
     gTH.SetLineStyle(7)
     gTH.SetLineWidth(4)
+    gTH.SetMarkerSize(0)
+    gTH.SetMarkerColor(ROOT.kRed+1)
     gTH.SetLineColor(ROOT.kRed+1)
 
     leg = TLegend(0.58,0.633,0.969,0.908)
@@ -110,7 +112,7 @@ def limit_canvas(limits_, signal_, oname_):
 
     g95.Draw('f')
     g68.Draw('f')
-    gTH.Draw('PL')
+    gTH.Draw('L')
     gExp.Draw('L')
 
     gObs.Sort()

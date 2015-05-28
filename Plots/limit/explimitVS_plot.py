@@ -136,7 +136,7 @@ for s in signal_dict:
       ('txt/limits_'+s+'_com_0828.txt', 'Combination'       , 1, ROOT.kBlack),
       ('txt/limits_'+s+'_dil_0828.txt', 'Dilepton'          , 1, c_GreenT3),
       ('txt/limits_'+s+'_ltr.txt'     , 'Lepton+jets (threshold)', 2, c_BlueT3),
-      ('txt/limits_'+s+'_lep_0828.txt', 'Lepton+jets (boosted)'  , 1, c_BlueT1),
+      ('txt/limits_'+s+'_lep_0828.txt', 'Lepton+jets'  , 1, c_BlueT1),
       ('txt/limits_'+s+'_htt_0828.txt', 'All-hadronic (low-mass)'  , 3, c_DarkOrange),
       ('txt/limits_'+s+'_ctt_0828.txt', 'All-hadronic (high-mass)'  , 5, c_RedT1)
       #('txt/limits_'+s+'_B2G13001.txt', 'PRL'        , 2, ROOT.kGray+1),
