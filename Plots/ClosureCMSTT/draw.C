@@ -30,7 +30,7 @@ void draw(TString fname = "qcdClosure_lowDY.root", int lohiDY = 0)
   gStyle->SetAxisColor(1, "XYZ");
   gStyle->SetStripDecimals(kTRUE);
   gStyle->SetTickLength(0.03, "XYZ");
-  gStyle->SetNdivisions(510, "XYZ");
+  gStyle->SetNdivisions(1005, "XYZ");
 
   gStyle->UseCurrentStyle();
 
@@ -61,8 +61,8 @@ void draw(TString fname = "qcdClosure_lowDY.root", int lohiDY = 0)
   TPad* m_rp1_top = new TPad("pad1", "Control Plots 2", x1, y2, x2, y3);
   TPad* m_rp1 = new TPad("rp1", "Ratio2", x1, y1, x2, y2);
        
-  m_rp1_top->SetTopMargin(0.1); m_rp1_top->SetBottomMargin(0.0); m_rp1_top->SetLeftMargin(0.19); m_rp1_top->SetRightMargin(0.05);
-  m_rp1->SetTopMargin(0.0); m_rp1->SetBottomMargin(0.35); m_rp1->SetLeftMargin(0.19); m_rp1->SetRightMargin(0.05);
+  m_rp1_top->SetTopMargin(0.1); m_rp1_top->SetBottomMargin(0.01); m_rp1_top->SetLeftMargin(0.19); m_rp1_top->SetRightMargin(0.05);
+  m_rp1->SetTopMargin(0.01); m_rp1->SetBottomMargin(0.35); m_rp1->SetLeftMargin(0.19); m_rp1->SetRightMargin(0.05);
  
  //TGraphAsymmErrors* data_eff = (TGraphAsymmErrors*) file->Get("qcd3H");
  //TGraphAsymmErrors* mc_eff = (TGraphAsymmErrors*) file->Get("qcd3predH");
@@ -243,6 +243,7 @@ void draw(TString fname = "qcdClosure_lowDY.root", int lohiDY = 0)
   ratio->GetXaxis()->SetTickLength(0.08);
   ratio->GetXaxis()->SetTitleSize(0.16);
   ratio->GetXaxis()->SetTitleOffset(1.0);
+  ratio->GetXaxis()->SetNdivisions(1005);
   
   // y-axis
   ratio->GetYaxis()->CenterTitle();
