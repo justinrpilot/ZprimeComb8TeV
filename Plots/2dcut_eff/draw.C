@@ -59,8 +59,8 @@ void draw(TString fname = "2dcut_dRjet_muon.root")
   TPad* m_rp1_top = new TPad("pad1", "Control Plots 2", x1, y2, x2, y3);
   TPad* m_rp1 = new TPad("rp1", "Ratio2", x1, y1, x2, y2);
        
-  m_rp1_top->SetTopMargin(0.065); m_rp1_top->SetBottomMargin(0.0); m_rp1_top->SetLeftMargin(0.19); m_rp1_top->SetRightMargin(0.05);
-  m_rp1->SetTopMargin(0.0); m_rp1->SetBottomMargin(0.35); m_rp1->SetLeftMargin(0.19); m_rp1->SetRightMargin(0.05);
+  m_rp1_top->SetTopMargin(0.065); m_rp1_top->SetBottomMargin(0.01); m_rp1_top->SetLeftMargin(0.19); m_rp1_top->SetRightMargin(0.05);
+  m_rp1->SetTopMargin(0.01); m_rp1->SetBottomMargin(0.35); m_rp1->SetLeftMargin(0.19); m_rp1->SetRightMargin(0.05);
 
   TGraphAsymmErrors* data_eff = (TGraphAsymmErrors*) file->Get("DATA_eff");
   TGraphAsymmErrors* mc_eff = (TGraphAsymmErrors*) file->Get("MC_eff");
@@ -73,13 +73,15 @@ void draw(TString fname = "2dcut_dRjet_muon.root")
   data_eff->SetMarkerStyle(20);
   data_eff->SetMarkerColor(kBlack);
   data_eff->SetLineColor(kBlack);
+  data_eff->SetLineWidth(2);  
   data_eff->Draw("AP");
   double x,y;
 
   mc_eff->SetMarkerStyle(25);
   mc_eff->SetMarkerColor(kRed+1);
   mc_eff->SetLineColor(kRed+1);
-    
+  mc_eff->SetLineWidth(2);  
+
   TH1F* painter = data_eff->GetHistogram();
 
   painter->GetXaxis()->SetTitle("#DeltaR(l,jet)");
@@ -151,6 +153,7 @@ void draw(TString fname = "2dcut_dRjet_muon.root")
   gleg->SetMarkerStyle(25);
   gleg->SetMarkerColor(kRed+1);
   gleg->SetLineColor(kRed+1);
+  gleg->SetLineWidth(2);
   gleg->Draw("Z0P");
 
   dleg->SetTextFont(42);
@@ -167,6 +170,7 @@ void draw(TString fname = "2dcut_dRjet_muon.root")
   ratio->SetMarkerStyle(20);
   ratio->SetMarkerColor(kBlack);
   ratio->SetLineColor(kBlack);
+  ratio->SetLineWidth(2);  
   ratio->Draw("AP");
 
   TLine* l = new TLine(0, 1, 0.5, 1);
