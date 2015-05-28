@@ -1,5 +1,6 @@
 #include "SHist.h"
 #include <TList.h>
+#include <TExec.h>
 #include <iostream>
 #include <stdlib.h>
 
@@ -128,7 +129,7 @@ void SHist::SetLegName(TString name)
   m_leg_name.ReplaceAll("[", "{");
   m_leg_name.ReplaceAll("]", "}");
   m_leg_name.ReplaceAll("_", " ");
-  m_leg_name.ReplaceAll("ttbar", "t#bar{t}");
+  m_leg_name.ReplaceAll("TTbar", "t#bar{t}");
 }
 
 TString SHist::GetLegName()
@@ -252,8 +253,9 @@ void SHist::Draw(Option_t *option)
       m_asymme->Draw("E2 " + dopt);
       return;
     }
-    m_hist->SetFillColor(0);
-    m_hist->DrawCopy("HIST same");
+    // this was previously used to draw a line at 1, do this rather in SPlotter::PlotRatios
+    //m_hist->SetFillColor(0);
+    //m_hist->DrawCopy("HIST same");
     return;
   }
 
@@ -276,12 +278,12 @@ void SHist::Draw(Option_t *option)
     if (m_hist->GetMarkerStyle()>0){
 
       if (m_draw_noxerr){
-	m_hist->Draw("P " + dopt);
+      	m_hist->Draw("E0 " + dopt);
       } else {
-	for (Int_t i=1; i<m_hist->GetNbinsX()+1; ++i){
-	  if (m_hist->GetBinContent(i)==0) m_hist->SetBinError(i,0);
-	}
-	m_hist->Draw("E0 " + dopt);
+      	for (Int_t i=1; i<m_hist->GetNbinsX()+1; ++i){
+      	  if (m_hist->GetBinContent(i)==0) m_hist->SetBinError(i,0);
+      	}
+	      m_hist->Draw("E0 " + dopt);
       }
     } else {
       m_hist->Draw("HIST " + dopt);

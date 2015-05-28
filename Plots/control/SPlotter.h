@@ -28,6 +28,8 @@ class SPlotter
   void PlotRatios(std::vector<SHist*> hists, int ipad);
   void PlotZScore(std::vector<SHist*> hists, int ipad);
   void PlotLumiYield(SHist* hist, int ipad);
+  void DrawPoissonCoverage(SHist* data, int lastbin=999999);
+  void DrawPoissonCoverageInRatio(std::vector<SHist*> hists);
 
   // collect all histograms
   void DoStacking(std::vector<TObjArray*>& hists, TObjArray* StackNames, bool rename=false);
@@ -46,7 +48,7 @@ class SPlotter
   std::vector<SHist*> CalcZScore(std::vector<SHist*> hists);
   void ShapeNormalise(std::vector<SHist*> hists);
   void DrawLegend(std::vector<SHist*> hists);
-  void DrawLumi();
+  void DrawLumi(double lumi = -1);
   void DrawSysError(SHist* stack);
   double CalcNormErrorForBin(SHist* stack, int i);
   double CalcShapeSysErrorForBinFromTheta(SHist* stack, int i, TString sign);
@@ -129,6 +131,7 @@ class SPlotter
   bool  need_update;        // should the canvas get an update?
   bool  bPlotLogy;          // plot all plots with log y scale
   bool  bIgnoreEmptyBins;   // don't plot empty bins in the ratio
+  bool  bPubStyleErrors;    // draw errors with Poissoninan coverage but without x-error bar
 
   bool  m_printout;
   int m_written;
