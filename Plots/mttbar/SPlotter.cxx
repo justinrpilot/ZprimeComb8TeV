@@ -270,9 +270,6 @@ void SPlotter::SetupGlobalStyle()
 
   gStyle->UseCurrentStyle();
 
-  if (bPubStyleErrors){
-    gStyle->SetErrorX(0.);
-  }
 }
 
 void SPlotter::Cleanup()
@@ -428,10 +425,10 @@ void SPlotter::SetupCanvasForEPS()
   m_pad1->SetTopMargin(0.05); m_pad1->SetBottomMargin(0.16);  m_pad1->SetLeftMargin(0.19); m_pad1->SetRightMargin(0.05);
   m_pad2->SetTopMargin(0.05); m_pad2->SetBottomMargin(0.16);  m_pad2->SetLeftMargin(0.19); m_pad2->SetRightMargin(0.05);
   
-  m_rp1_top->SetTopMargin(0.065); m_rp1_top->SetBottomMargin(0.0);  m_rp1_top->SetLeftMargin(0.19); m_rp1_top->SetRightMargin(0.05);
-  m_rp2_top->SetTopMargin(0.065); m_rp2_top->SetBottomMargin(0.0);  m_rp2_top->SetLeftMargin(0.19); m_rp2_top->SetRightMargin(0.05);
-  m_rp1->SetTopMargin(0.0);    m_rp1->SetBottomMargin(0.35);  m_rp1->SetLeftMargin(0.19);  m_rp1->SetRightMargin(0.05);
-  m_rp2->SetTopMargin(0.0);    m_rp2->SetBottomMargin(0.35);  m_rp2->SetLeftMargin(0.19);  m_rp2->SetRightMargin(0.05);    
+  m_rp1_top->SetTopMargin(0.065); m_rp1_top->SetBottomMargin(0.01);  m_rp1_top->SetLeftMargin(0.19); m_rp1_top->SetRightMargin(0.05);
+  m_rp2_top->SetTopMargin(0.065); m_rp2_top->SetBottomMargin(0.01);  m_rp2_top->SetLeftMargin(0.19); m_rp2_top->SetRightMargin(0.05);
+  m_rp1->SetTopMargin(0.01);    m_rp1->SetBottomMargin(0.35);  m_rp1->SetLeftMargin(0.19);  m_rp1->SetRightMargin(0.05);
+  m_rp2->SetTopMargin(0.01);    m_rp2->SetBottomMargin(0.35);  m_rp2->SetLeftMargin(0.19);  m_rp2->SetRightMargin(0.05);    
   
   if (debug){
     m_rp1_top->SetFillColor(kYellow);
@@ -613,6 +610,9 @@ void SPlotter::ProcessAndPlot(std::vector<TObjArray*> histarr)
       } else {
       	if (bDrawLumi) DrawLumi();
       }
+      // finally: redraw axes
+      gPad->RedrawAxis();
+
       // draw the ratio
       if (bPlotRatio){
       	if (bZScoreInRatio) PlotZScore(hists, ipad);
@@ -1647,8 +1647,8 @@ void SPlotter::DrawLegend(vector<SHist*> hists)
   // do the ordering by hand
   cout << "warning: plotting legend - check if ordering is ok (by hand, line 1530 in SPlotter!" << endl;
   //Int_t j[] = {0, 4, 1, 2, 3, 5, 6}; // dilepton
-  //Int_t j[] = {0, 2, 1, 3, 4}; // CMSTT
-  Int_t j[] = {0, 7, 1, 2, 3, 4, 5, 6, 8, 9}; // l+jets case
+  Int_t j[] = {0, 2, 1, 3, 4}; // CMSTT
+  //Int_t j[] = {0, 7, 1, 2, 3, 4, 5, 6, 8, 9}; // l+jets case
 
   for (Int_t i=0; i<narr; ++i){
 
@@ -1876,7 +1876,7 @@ bool SPlotter::SetMinMax(vector<SHist*> hists)
     double imin = hists[i]->GetMinimum(1e-10);
     if (min>imin){
       if (imin>1e-10){
-	min = imin;
+	      min = imin;
       }
     }
   }
@@ -2173,6 +2173,9 @@ void SPlotter::SingleEPSCosmetics(TH1* hist)
 
     // x-axis
     hist->GetXaxis()->SetTickLength(0.05);
+    hist->GetXaxis()->SetLabelSize(0.0);
+    hist->GetXaxis()->SetTitleSize(0.0);
+    hist->GetXaxis()->SetTitleOffset(1.0);
 
     // y-axis
     hist->GetYaxis()->SetTitleSize(0.07);

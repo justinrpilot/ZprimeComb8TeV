@@ -248,8 +248,8 @@ void SHist::Draw(Option_t *option)
   TString dopt(option);
 
   if (m_process.Contains("MCstat") || m_process.Contains("MCtot")){
-    TExec *setex2 = new TExec("setex2","gStyle->SetErrorX(0.5)");
-    setex2->Draw();
+    //TExec *setex2 = new TExec("setex2","gStyle->SetErrorX(0.5)");
+    //setex2->Draw();
     m_hist->DrawCopy("E2 " + dopt);
     if (m_asymme){
       m_asymme->Draw("E2 " + dopt);
@@ -280,16 +280,12 @@ void SHist::Draw(Option_t *option)
     if (m_hist->GetMarkerStyle()>0){
 
       if (m_draw_noxerr){
-        TExec *setex1 = new TExec("setex2","gStyle->SetErrorX(0.)");
-        setex1->Draw();
-      	m_hist->Draw("E0 " + dopt);
+      	m_hist->Draw("E0 X0 " + dopt);
       } else {
       	for (Int_t i=1; i<m_hist->GetNbinsX()+1; ++i){
       	  if (m_hist->GetBinContent(i)==0) m_hist->SetBinError(i,0);
       	}
-        TExec *setex1 = new TExec("setex2","gStyle->SetErrorX(0.)");
-        setex1->Draw();
-	      m_hist->Draw("E0 " + dopt);
+	      m_hist->Draw("E0 X0 " + dopt);
       }
     } else {
       m_hist->Draw("HIST " + dopt);
